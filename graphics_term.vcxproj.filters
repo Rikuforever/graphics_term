@@ -24,21 +24,33 @@
     <ClCompile Include="script\Texture2D.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="script\Engine.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="script\GameObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="script\ShaderProgram.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="script\Engine.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="script\Texture2D.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="script\GameObject.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\shaders\basic.frag">
-      <Filter>소스 파일</Filter>
+      <Filter>리소스 파일</Filter>
     </None>
     <None Include="bin\shaders\basic.vert">
-      <Filter>소스 파일</Filter>
+      <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
 </Project>

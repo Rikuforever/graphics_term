@@ -83,10 +83,15 @@ string ShaderProgram::fileToString(const string& filename)
 }
 
 
-void ShaderProgram::use()
+void ShaderProgram::bind()
 {
 	if (mHandle > 0)
 		glUseProgram(mHandle);
+}
+
+void ShaderProgram::unbind()
+{
+	glUseProgram(0);
 }
 
 

@@ -19,11 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="script\Engine.cpp" />
+    <ClCompile Include="script\GameObject.cpp" />
     <ClCompile Include="script\main.cpp" />
     <ClCompile Include="script\ShaderProgram.cpp" />
     <ClCompile Include="script\Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="script\Engine.h" />
+    <ClInclude Include="script\GameObject.h" />
     <ClInclude Include="script\ShaderProgram.h" />
     <ClInclude Include="script\Texture2D.h" />
   </ItemGroup>

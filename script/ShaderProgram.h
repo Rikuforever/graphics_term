@@ -23,7 +23,8 @@ public:
 	};
 
 	bool loadShaders(const char* vsFilename, const char* fsFilename);
-	void use();
+	void bind();
+	void unbind();
 
 	GLuint getProgram() const;
 

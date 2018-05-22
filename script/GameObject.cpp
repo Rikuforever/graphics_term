@@ -1,8 +1,12 @@
 #include "GameObject.h"
+#include "Engine.h"
 
 #include "glm/gtc/matrix_transform.hpp"
 
 GameObject::GameObject()
+	: position(0.0f, 0.0f, 0.0f),
+	rotation(0.0f, 0.0f, 0.0f),
+	scale(1.0f, 1.0f, 1.0f)
 {
 }
 
@@ -94,18 +98,15 @@ void GameObject::draw()
 	// Bind shader
 	if(mShaderPtr != nullptr)
 	{
-		glm::vec3 camPos(0.0f, 0.0f, 0.0f);
-		glm::vec3 targetPos(0.0f, 0.0f, -1.0f);
-		glm::vec3 up(0.0f, 1.0f, 0.0f);
-
 		// Compute matrix
 		glm::mat4 model, view, projection;
 		model = glm::translate(model, position) *
 			glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f)) *
 			glm::rotate(model, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f)) *
-			glm::rotate(model, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-		view = glm::lookAt(camPos, camPos + targetPos, up);
-		projection = glm::perspective(glm::radians(45.0f), (float)*wWidthPtr / (float)*wHeightPtr, 0.1f, 100.0f);
+			glm::rotate(model, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f)) *
+			glm::scale(model, scale);
+		view = mEnginePtr->getCamera().getViewMatrix();
+		projection = glm::perspective(glm::radians(45.0f), (float)(mEnginePtr->gWindowWidth) / (float)(mEnginePtr->gWindowHeight), 0.1f, 100.0f);
 
 
 		mShaderPtr->bind();
@@ -127,10 +128,9 @@ void GameObject::draw()
 		mShaderPtr->unbind();
 }
 
-void GameObject::bindWindow(int& width, int& height)
+void GameObject::bindEngine(Engine* enginePtr)
 {
-	wWidthPtr = &width;
-	wHeightPtr = &height;
+	mEnginePtr = enginePtr;
 }
 
 void GameObject::bindShader(ShaderProgram & shader) {

@@ -3,6 +3,7 @@
 
 #include "ShaderProgram.h"
 #include "Texture2D.h"
+#include "Camera.h"
 #include "GameObject.h"
 
 class Engine
@@ -19,8 +20,11 @@ public:
 	void mouseClick(GLint button, GLint state, GLint x, GLint y);
 	void mouseMotion(GLint x, GLint y);
 	void keyboard(unsigned char key, int x, int y);
+	void keyboardUp(unsigned char key, int x, int y);
 	void specialKeyboard(int key, int x, int y);
 	void idle(void);
+
+	Camera getCamera();
 
 	// resolution
 	int gWindowWidth = 1024;
@@ -31,15 +35,22 @@ public:
 
 private:
 	ShaderProgram mShader;
-	Texture2D mTexture;
+	Texture2D mTexture1;
+	Texture2D mTexture2;
+	Camera mCam;
 
-	GameObject mObj;
+	// objects
+	GameObject mObjPlayer;
+	GameObject mObjFloor;
 
 	// update
 	double mCurrentTime;
 	double mLastTime;
 
 	// render
+
+	// keyboard
+	bool keyStates[256] = {false};
 
 };
 

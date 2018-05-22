@@ -22,13 +22,24 @@ bool Engine::init()
 	
 	// Load resources
 	mShader.loadShaders("shaders/basic.vert", "shaders/basic.frag");
-	mTexture.loadTexture("textures/wooden_crate.jpg", true);
-	mObj.load();
+	mTexture1.loadTexture("textures/wooden_crate.jpg", true);
+	mTexture2.loadTexture("textures/grid.jpg", true);
+	mObjPlayer.load();
+	mObjFloor.load();
 
 	// Bind resources
-	mObj.bindWindow(gWindowWidth,gWindowHeight);
-	mObj.bindShader(mShader);
-	mObj.bindTexture(mTexture);
+	mObjPlayer.bindEngine(this);
+	mObjPlayer.bindShader(mShader);
+	mObjPlayer.bindTexture(mTexture1);
+	mObjFloor.bindEngine(this);
+	mObjFloor.bindShader(mShader);
+	mObjFloor.bindTexture(mTexture2);
+
+	// Set scene
+	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, -10.0f));
+	mCam.setLookAt(mObjPlayer.position);
+	mObjFloor.position = glm::vec3(0.0f, -1.0f, 0.0f);
+	mObjFloor.scale = glm::vec3(10.0f, 0.01f, 10.0f);
 
 	return true;
 }
@@ -38,12 +49,23 @@ void Engine::update()
 	mCurrentTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
 	double deltaTime = mCurrentTime - mLastTime;
 
-	// update
-	mObj.position = glm::vec3(0.0f, 0.0f, -5.0f);
-	mObj.rotation.x += (float)(deltaTime * 50.0f);
-	if (mObj.rotation.x >= 360.0f) mObj.rotation.x = 0.0f;
-	mObj.rotation.y += (float)(deltaTime * 50.0f);
-	if (mObj.rotation.y >= 360.0f) mObj.rotation.y = 0.0f;
+	// update	
+	glm::vec3 previousPosition = glm::vec3(mObjPlayer.position);
+
+	if (keyStates['a'] || keyStates['A'])
+		mObjPlayer.position.z += (float)(deltaTime * 5.0f);
+	if (keyStates['d'] || keyStates['D']) 
+		mObjPlayer.position.z -= (float)(deltaTime * 5.0f);
+	if (keyStates['w'] || keyStates['W'])
+		mObjPlayer.position.x -= (float)(deltaTime * 5.0f);
+	if (keyStates['s'] || keyStates['S'])
+		mObjPlayer.position.x += (float)(deltaTime * 5.0f);
+
+	mCam.move(mObjPlayer.position - previousPosition);
+
+	// mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, -10.0f));
+	// mCam.setLookAt(mObjPlayer.position);
+
 }
 
 void Engine::render()
@@ -54,10 +76,10 @@ void Engine::render()
 	glLoadIdentity();
 
 	// render
-	mObj.draw();
+	mObjPlayer.draw();
+	mObjFloor.draw();
 
 	glutSwapBuffers();
-
 	mLastTime = mCurrentTime;
 }
 
@@ -90,6 +112,13 @@ void Engine::mouseMotion(GLint x, GLint y)
 
 void Engine::keyboard(unsigned char key, int x, int y)
 {
+	keyStates[key] = true;
+	glutPostRedisplay();
+}
+
+void Engine::keyboardUp(unsigned char key, int x, int y)
+{
+	keyStates[key] = false;
 	glutPostRedisplay();
 }
 
@@ -110,4 +139,9 @@ void Engine::specialKeyboard(int key, int x, int y)
 void Engine::idle()
 {
 	glutPostRedisplay();
+}
+
+Camera Engine::getCamera()
+{
+	return mCam;
 }

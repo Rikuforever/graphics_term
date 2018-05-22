@@ -22,6 +22,7 @@ void reshape(int w, int h);
 void mouseClick(GLint button, GLint state, GLint x, GLint y);
 void mouseMotion(GLint x, GLint y);
 void keyboard(unsigned char key, int x, int y);
+void keyboardUp(unsigned char key, int x, int y);
 void specialKeyboard(int key, int x, int y);
 void idle(void);
 void timer(int value);
@@ -68,6 +69,7 @@ bool initOpenGL(int argc, char** argv)
 	glutMouseFunc(mouseClick);
 	glutMotionFunc(mouseMotion);
 	glutKeyboardFunc(keyboard);
+	glutKeyboardUpFunc(keyboardUp);
 	glutSpecialFunc(specialKeyboard);
 	glutIdleFunc(idle);
 
@@ -130,6 +132,11 @@ void mouseMotion(GLint x, GLint y) {
 
 void keyboard(unsigned char key, int x, int y) {
 	e.keyboard(key, x, y);
+}
+
+void keyboardUp(unsigned char key, int x, int y)
+{
+	e.keyboardUp(key, x, y);
 }
 
 void specialKeyboard(int key, int x, int y)

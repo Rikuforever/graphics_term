@@ -21,7 +21,8 @@ bool Engine::init()
 	mLastTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
 	
 	// Load resources
-	mShader.loadShaders("shaders/basic.vert", "shaders/basic.frag");
+	mShaderPlayer.loadShaders("shaders/basic.vert", "shaders/basic.frag");
+	mShaderMap.loadShaders("shaders/map.vert", "shaders/map.frag");
 	mTexture1.loadTexture("textures/wooden_crate.jpg", true);
 	mTexture2.loadTexture("textures/grid.jpg", true);
 	mObjPlayer.load();
@@ -29,17 +30,26 @@ bool Engine::init()
 
 	// Bind resources
 	mObjPlayer.bindEngine(this);
-	mObjPlayer.bindShader(mShader);
+	mObjPlayer.bindShader(mShaderPlayer);
 	mObjPlayer.bindTexture(mTexture1);
 	mObjFloor.bindEngine(this);
-	mObjFloor.bindShader(mShader);
+	mObjFloor.bindShader(mShaderPlayer);
 	mObjFloor.bindTexture(mTexture2);
 
 	// Set scene
-	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, -10.0f));
+	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, 10.0f));
 	mCam.setLookAt(mObjPlayer.position);
 	mObjFloor.position = glm::vec3(0.0f, -1.0f, 0.0f);
 	mObjFloor.scale = glm::vec3(10.0f, 0.01f, 10.0f);
+
+	// Construct Map
+	mObjMap.setData(0, 0, 0, 1);
+	mObjMap.setData(1, 0, 0, 1);
+	mObjMap.setData(0, 1, 0, 1);
+	mObjMap.setData(0, 0, 1, 1);
+	mObjMap.bindEngine(this);
+	mObjMap.bindShader(mShaderMap);
+	mObjMap.load();
 
 	return true;
 }
@@ -53,13 +63,13 @@ void Engine::update()
 	glm::vec3 previousPosition = glm::vec3(mObjPlayer.position);
 
 	if (keyStates['a'] || keyStates['A'])
-		mObjPlayer.position.z += (float)(deltaTime * 5.0f);
-	if (keyStates['d'] || keyStates['D']) 
-		mObjPlayer.position.z -= (float)(deltaTime * 5.0f);
-	if (keyStates['w'] || keyStates['W'])
 		mObjPlayer.position.x -= (float)(deltaTime * 5.0f);
-	if (keyStates['s'] || keyStates['S'])
+	if (keyStates['d'] || keyStates['D']) 
 		mObjPlayer.position.x += (float)(deltaTime * 5.0f);
+	if (keyStates['w'] || keyStates['W'])
+		mObjPlayer.position.z -= (float)(deltaTime * 5.0f);
+	if (keyStates['s'] || keyStates['S'])
+		mObjPlayer.position.z += (float)(deltaTime * 5.0f);
 
 	mCam.move(mObjPlayer.position - previousPosition);
 
@@ -76,8 +86,9 @@ void Engine::render()
 	glLoadIdentity();
 
 	// render
-	mObjPlayer.draw();
-	mObjFloor.draw();
+	//mObjPlayer.draw();
+	//mObjFloor.draw();
+	mObjMap.draw();
 
 	glutSwapBuffers();
 	mLastTime = mCurrentTime;

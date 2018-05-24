@@ -20,13 +20,13 @@ public :
 	glm::vec3 scale;
 
 	// GLUT callbacks
-	void load();
-	void draw();
+	virtual void load();
+	virtual void draw();
 
 	void bindEngine(Engine* enginePtr);
 	void bindShader(ShaderProgram& shader);
 	void bindTexture(Texture2D& texture);
-private:
+protected:
 	GLuint mVAO;
 	ShaderProgram* mShaderPtr;
 	Texture2D* mTexturePtr;

@@ -5,6 +5,7 @@
 #include "Texture2D.h"
 #include "Camera.h"
 #include "GameObject.h"
+#include "GameMap.h"
 
 class Engine
 {
@@ -34,7 +35,8 @@ public:
 	bool gWireframe = false;
 
 private:
-	ShaderProgram mShader;
+	ShaderProgram mShaderPlayer;
+	ShaderProgram mShaderMap;
 	Texture2D mTexture1;
 	Texture2D mTexture2;
 	Camera mCam;
@@ -42,6 +44,7 @@ private:
 	// objects
 	GameObject mObjPlayer;
 	GameObject mObjFloor;
+	GameMap mObjMap;
 
 	// update
 	double mCurrentTime;

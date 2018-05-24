@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 bool initOpenGL(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	glutInitWindowSize(e.gWindowWidth, e.gWindowHeight);
 
 	// Create Window

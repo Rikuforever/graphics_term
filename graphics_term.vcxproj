@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="script\Camera.cpp" />
     <ClCompile Include="script\Engine.cpp" />
+    <ClCompile Include="script\GameMap.cpp" />
     <ClCompile Include="script\GameObject.cpp" />
     <ClCompile Include="script\main.cpp" />
     <ClCompile Include="script\ShaderProgram.cpp" />
@@ -29,6 +30,7 @@
   <ItemGroup>
     <ClInclude Include="script\Camera.h" />
     <ClInclude Include="script\Engine.h" />
+    <ClInclude Include="script\GameMap.h" />
     <ClInclude Include="script\GameObject.h" />
     <ClInclude Include="script\ShaderProgram.h" />
     <ClInclude Include="script\Texture2D.h" />

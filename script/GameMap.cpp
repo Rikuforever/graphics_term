@@ -31,12 +31,17 @@ void GameMap::load()
 	// create vertices
 	for(int posIdx = 0; posIdx < posList.size(); posIdx++)
 	{
-		for (int verIdx = 0; verIdx < VERTICES_LENGTH; verIdx += 3) {
+		for (int verIdx = 0; verIdx < VERTICES_LENGTH; verIdx += 6) {
 			glm::vec3 vertex;
 			vertex.x = cubeVertices[verIdx] * 0.5 + posList[posIdx].x;
 			vertex.y = cubeVertices[verIdx + 1] * 0.5 + posList[posIdx].y;
 			vertex.z = cubeVertices[verIdx + 2] * 0.5 + posList[posIdx].z;
 			mVertices.push_back(vertex);
+			glm::vec3 normal;
+			normal.x = cubeVertices[verIdx + 3];
+			normal.y = cubeVertices[verIdx + 4];
+			normal.z = cubeVertices[verIdx + 5];
+			mVertices.push_back(normal);
 		}
 	}
 
@@ -50,17 +55,23 @@ void GameMap::load()
 	glBufferData(GL_ARRAY_BUFFER, mVertices.size() * sizeof(glm::vec3), &mVertices[0], GL_STATIC_DRAW);
 
 	// Position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)(0));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(0));
 	glEnableVertexAttribArray(0);
+
+	// Normal attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
 
 	// Unbind buffer
 	glBindVertexArray(0);
+
 }
 
 void GameMap::draw()
 {
 	// Ignore texture
-	// Bind shader
+
+	// Bind shader (map.vert / map.frag)
 	if (mShaderPtr != nullptr) {
 		// Compute matrix
 		glm::mat4 model, view, projection;
@@ -76,11 +87,22 @@ void GameMap::draw()
 		mShaderPtr->setUniform("model", model);
 		mShaderPtr->setUniform("view", view);
 		mShaderPtr->setUniform("projection", projection);
+
+
+		if (mLightPtr != nullptr)
+			mLightPtr->setUniform(*mShaderPtr);
+
+		if (mMaterialPtr != nullptr)
+			mMaterialPtr->setUniform(*mShaderPtr);
 	}
 	
 	glBindVertexArray(mVAO);
-	glDrawArrays(GL_TRIANGLES, 0, mVertices.size());
+	glDrawArrays(GL_TRIANGLES, 0, mVertices.size() / 2);
 	glBindVertexArray(0);
+
+	// Unbind shader
+	if (mShaderPtr != nullptr)
+		mShaderPtr->unbind();
 }
 
 int GameMap::getData(int x, int y, int z) 

@@ -29,16 +29,27 @@ bool Engine::init()
 	mObjFloor.load();
 
 	// Bind resources
-	mObjPlayer.bindEngine(this);
+	mObjPlayer.bindEngine(this);			// player
 	mObjPlayer.bindShader(mShaderPlayer);
 	mObjPlayer.bindTexture(mTexture1);
-	mObjFloor.bindEngine(this);
+	mObjFloor.bindEngine(this);				// floor
 	mObjFloor.bindShader(mShaderPlayer);
 	mObjFloor.bindTexture(mTexture2);
+	mObjMap.bindEngine(this);				// map
+	mObjMap.bindShader(mShaderMap);
+	mObjMap.bindLight(mLightDir);
+	mObjMap.bindMaterial(mMaterialMap);
 
 	// Set scene
 	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, 10.0f));
 	mCam.setLookAt(mObjPlayer.position);
+	mLightDir.direction = glm::vec3(-1.0f, -2.0f, -3.0f);
+	mLightDir.ambient = glm::vec3(0.2f, 0.2f, 0.2f);
+	mLightDir.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+	mLightDir.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+
+
+	// Set objects
 	mObjFloor.position = glm::vec3(0.0f, -1.0f, 0.0f);
 	mObjFloor.scale = glm::vec3(10.0f, 0.01f, 10.0f);
 
@@ -47,9 +58,12 @@ bool Engine::init()
 	mObjMap.setData(1, 0, 0, 1);
 	mObjMap.setData(0, 1, 0, 1);
 	mObjMap.setData(0, 0, 1, 1);
-	mObjMap.bindEngine(this);
-	mObjMap.bindShader(mShaderMap);
 	mObjMap.load();
+	// Set Map
+	mMaterialMap.ambient = glm::vec3(0.1f, 0.1f, 0.1f);
+	mMaterialMap.diffuse = glm::vec3(0.6f, 0.0f, 0.0f);
+	mMaterialMap.specular = glm::vec3(0.8f, 0.8f, 0.8f);
+	mMaterialMap.shininess = 500.0f;
 
 	return true;
 }

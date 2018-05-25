@@ -4,6 +4,8 @@
 #include "ShaderProgram.h"
 #include "Texture2D.h"
 #include "Camera.h"
+#include "Light.h"
+#include "Material.h"
 #include "GameObject.h"
 #include "GameMap.h"
 
@@ -40,6 +42,8 @@ private:
 	Texture2D mTexture1;
 	Texture2D mTexture2;
 	Camera mCam;
+	DirLight mLightDir;
+	Material mMaterialMap;
 
 	// objects
 	GameObject mObjPlayer;

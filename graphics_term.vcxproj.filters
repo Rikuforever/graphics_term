@@ -36,6 +36,12 @@
     <ClCompile Include="script\GameMap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="script\Light.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="script\Material.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="script\ShaderProgram.h">
@@ -56,12 +62,24 @@
     <ClInclude Include="script\GameMap.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="script\Material.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="script\Light.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\shaders\basic.frag">
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="bin\shaders\basic.vert">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="bin\shaders\map.frag">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="bin\shaders\map.vert">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>

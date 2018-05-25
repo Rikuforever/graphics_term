@@ -113,6 +113,12 @@ void GameObject::draw()
 		mShaderPtr->setUniform("model", model);
 		mShaderPtr->setUniform("view", view);
 		mShaderPtr->setUniform("projection", projection);
+
+		if (mLightPtr != nullptr)
+			mLightPtr->setUniform(*mShaderPtr);
+
+		if (mMaterialPtr != nullptr)
+			mMaterialPtr->setUniform(*mShaderPtr);
 	}
 
 	glBindVertexArray(mVAO);
@@ -140,5 +146,15 @@ void GameObject::bindShader(ShaderProgram & shader) {
 void GameObject::bindTexture(Texture2D & texture)
 {
 	mTexturePtr = &texture;
+}
+
+void GameObject::bindMaterial(Material& material)
+{
+	mMaterialPtr = &material;
+}
+
+void GameObject::bindLight(Light& light)
+{
+	mLightPtr = &light;
 }
 

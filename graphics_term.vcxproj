@@ -23,7 +23,9 @@
     <ClCompile Include="script\Engine.cpp" />
     <ClCompile Include="script\GameMap.cpp" />
     <ClCompile Include="script\GameObject.cpp" />
+    <ClCompile Include="script\Light.cpp" />
     <ClCompile Include="script\main.cpp" />
+    <ClCompile Include="script\Material.cpp" />
     <ClCompile Include="script\ShaderProgram.cpp" />
     <ClCompile Include="script\Texture2D.cpp" />
   </ItemGroup>
@@ -32,12 +34,16 @@
     <ClInclude Include="script\Engine.h" />
     <ClInclude Include="script\GameMap.h" />
     <ClInclude Include="script\GameObject.h" />
+    <ClInclude Include="script\Light.h" />
+    <ClInclude Include="script\Material.h" />
     <ClInclude Include="script\ShaderProgram.h" />
     <ClInclude Include="script\Texture2D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\shaders\basic.frag" />
     <None Include="bin\shaders\basic.vert" />
+    <None Include="bin\shaders\map.frag" />
+    <None Include="bin\shaders\map.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

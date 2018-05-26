@@ -64,7 +64,6 @@ void DefineCubeLine(Cube* pcube) {
 		}
 	}
 }
-
 void CubeFall(Cube*pcube) {
 	int mapScan = pcube->mapScan;
 	if ((mapScan | 1) != mapScan) {
@@ -72,6 +71,9 @@ void CubeFall(Cube*pcube) {
 			switch (keymode) {
 			case 'a':
 				if ((pcube->mapScan | 32) == mapScan) {
+					pcube->cstatus = Falling;
+				}
+				else if ((pcube->mapScan | 4) == mapScan) {
 					pcube->cstatus = Falling;
 				}
 				else {
@@ -82,6 +84,9 @@ void CubeFall(Cube*pcube) {
 				if ((pcube->mapScan | 64) == mapScan) {
 					pcube->cstatus = Falling;
 				}
+				else if ((pcube->mapScan | 2) == mapScan) {
+					pcube->cstatus = Falling;
+				}
 				else {
 					pcube->cstatus = Moving;
 				}
@@ -90,27 +95,34 @@ void CubeFall(Cube*pcube) {
 				if ((pcube->mapScan | 1024) == mapScan) {
 					pcube->cstatus = Falling;
 				}
-				else {
-					pcube->cstatus = Moving;
-				}
-				break;
-			case 's':
-				if ((pcube->mapScan | 1024) == mapScan) {
+				else if ((pcube->mapScan | 8) == mapScan) {
 					pcube->cstatus = Falling;
 				}
 				else {
 					pcube->cstatus = Moving;
 				}
 				break;
-
-
+			case 's':
+				if ((pcube->mapScan | 512) == mapScan) {
+					pcube->cstatus = Falling;
+				}
+				else if ((pcube->mapScan | 16) == mapScan) {
+					pcube->cstatus = Falling;
+				}
+				else {
+					pcube->cstatus = Moving;
+				}
+				break;
 			default:
 				break;
 			}
 		}
 		else {
-			float frame = 20.0;
+			float frame = 2.0;
 			pcube->yangle -= 90.0 / frame;
+			if ((int)(pcube->yangle) % 90 != 0) {
+				pcube->yangle = 90.0*floor(pcube->yangle / 90);
+			}
 			pcube->position.y -= 1.0 / frame;
 			pcube->cstatus = Falling;
 		}
@@ -205,11 +217,11 @@ void Move_Method5(Cube* pcube) {
 void Move_Method6(Cube* pcube) {
 	float ad_angle = pcube->ad_angle;
 	if (keymode == 'w') {
-		pcube->full_z_angle += ad_angle;
+		pcube->full_z_angle -= ad_angle;
 		pcube->yangle += ad_angle;
 	}
 	else if (keymode == 's') {
-		pcube->full_z_angle -= ad_angle;
+		pcube->full_z_angle += ad_angle;
 		pcube->yangle -= ad_angle;
 	}
 	SetDeltaPosition(pcube);
@@ -219,6 +231,20 @@ void Move_Method6(Cube* pcube) {
 	if (modular_z_angle == 0) {
 		pcube->position.y -= 1;
 	}
+}
+
+void DebugLog(Cube* pcube) {
+	printf("mapscan : %d\n", pcube->mapScan);
+	printf("move : %d\n", pcube->UseMethod);
+	printf("xpos : %f\n", pcube->position.x);
+	printf("ypos : %f\n", pcube->position.y);
+	printf("zpos : %f\n", pcube->position.z);
+	printf("dx : %d\n", pcube->dx);
+	printf("dy : %d\n", pcube->dy);
+	printf("dz : %d\n", pcube->dz);
+	printf("xangle : %f\n", pcube->xangle);
+	printf("yangle : %f\n", pcube->yangle);
+	printf("zangle : %f\n", pcube->zangle);
 }
 
 void KeyMethod(Cube* pcube) {
@@ -312,18 +338,18 @@ void SetDeltaPosition(Cube* pcube) {
 	if (pcube->full_z_angle<0) {
 		pcube->full_z_angle += 360;
 	}
-	pcube->dx = pcube->xangle / 90.0;
-	pcube->dy = pcube->yangle / 90.0;
-	pcube->dz = pcube->zangle / 90.0;
+	pcube->dx = floor(pcube->xangle / 90.0);
+	pcube->dy = floor(pcube->yangle / 90.0);
+	pcube->dz = floor(pcube->zangle / 90.0);
 }
 
 
 
 void ScanMap(Cube* pcube) {
 	pcube->mapScan = 0;
-	int x = pcube->center.x;
-	int y = pcube->center.y;
-	int z = pcube->center.z;
+	int x = pcube->dx;
+	int y = pcube->dy;
+	int z = pcube->dz;
 	if (mapdata->getData(x,y - 1,z) == 1) {
 		pcube->mapScan = pcube->mapScan | 1;
 	}

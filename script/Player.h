@@ -135,7 +135,9 @@ void CubeFall(Cube*pcube) {
 }
 
 void Gravity(Cube* pcube) {
-	if (keymode != 'd'&&keymode != 'a'&&keymode != 'w'&&keymode != 's') {
+	int m = pcube->UseMethod;
+	char k = keymode;
+	if((((m==1||m==2)||m==3)&&(k!='a'&&k!='d'))||((m == 4 || m == 5) || m == 6) && (k != 'w'&&k != 's')) {
 		int tempx = (int)(pcube->full_x_angle) % 90;
 		int tempz = (int)(pcube->full_z_angle) % 90;
 

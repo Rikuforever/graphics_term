@@ -37,7 +37,8 @@ void main()
 	vec3 lightDir = normalize(-dirLight.direction);
 	float NdotL = max(dot(normal, lightDir), 0.0);
 	vec3 diffuse = dirLight.diffuse * NdotL * vec3(texture(material.diffuseMap, TexCoord)) * material.diffuse;
-
+	
+	/*
 	// Specular - Blinn-Phong
 	vec3 viewDir = normalize(viewPos - FragPos);
 	vec3 halfDir = normalize(lightDir + viewDir);
@@ -45,4 +46,7 @@ void main()
 	vec3 specular = dirLight.specular * material.specular * pow(NdotH, material.shininess);
 	
 	frag_color = vec4(ambient + diffuse + specular, 1.0f);
+	*/
+
+	frag_color = vec4(ambient + diffuse , 1.0f);
 }

@@ -12,7 +12,7 @@ struct Cube
 {
 	GameObject* objPtr;
 	
-	float ad_angle = 10;
+	float ad_angle = 1.0f;
 	float full_x_angle = 0;
 	float full_z_angle = 0;
 	float xangle = 0;
@@ -42,6 +42,7 @@ void SetDeltaPosition(Cube*);
 void KeyMethod(Cube*);
 void SetCubePosition(Cube *pcube, float x, float y, float z);
 glm::vec3 GetCubeCenter(Cube* pcube);
+void SetOffset(int x, int y, int z);
 #pragma endregion 
 
 Cube cube;
@@ -107,7 +108,7 @@ void CubeFall(Cube*pcube) {
 			}
 		}
 		else {
-			float frame = 2.0;
+			float frame = 20.0;
 			pcube->yangle -= 90.0 / frame;
 			pcube->position.y -= 1.0 / frame;
 			pcube->cstatus = Falling;
@@ -228,6 +229,7 @@ void KeyMethod(Cube* pcube) {
 			pcube->UseMethod = 2;
 		}
 		else {
+			pcube->cstatus = Moving;
 			pcube->UseMethod = 1;
 		}
 		break;
@@ -239,6 +241,7 @@ void KeyMethod(Cube* pcube) {
 		}
 		else {
 			pcube->UseMethod = 1;
+			pcube->cstatus = Moving;
 		}
 		break;
 
@@ -249,6 +252,7 @@ void KeyMethod(Cube* pcube) {
 		}
 		else {
 			pcube->UseMethod = 4;
+			pcube->cstatus = Moving;
 		}
 		break;
 
@@ -259,6 +263,7 @@ void KeyMethod(Cube* pcube) {
 		}
 		else {
 			pcube->UseMethod = 4;
+			pcube->cstatus = Moving;
 		}
 		break;
 	default:
@@ -314,45 +319,56 @@ void SetDeltaPosition(Cube* pcube) {
 
 
 void ScanMap(Cube* pcube) {
-	int cube_data = pcube->center.x + 100 * pcube->center.y + 10000 * pcube->center.z;
 	pcube->mapScan = 0;
-	if (mapdata->getData(x,y - 1,z) == 1 mapdata.count(cube_data - 100)) {
+	int x = pcube->center.x;
+	int y = pcube->center.y;
+	int z = pcube->center.z;
+	if (mapdata->getData(x,y - 1,z) == 1) {
 		pcube->mapScan = pcube->mapScan | 1;
 	}
-	if (mapdata->getData(x + 1, y, z) == 1 mapdata.count(cube_data + 1)) {
+	if (mapdata->getData(x + 1, y, z) == 1) {
 		pcube->mapScan = pcube->mapScan | 2;
 	}
-	if (mapdata->getData(x - 1, y, z) == 1 mapdata.count(cube_data - 1)) {
+	if (mapdata->getData(x - 1, y, z) == 1) {
 		pcube->mapScan = pcube->mapScan | 4;
 	}
-	if (mapdata->getData(x, y, z - 1) == 1 mapdata.count(cube_data - 10000)) {
+	if (mapdata->getData(x, y, z - 1) == 1) {
 		pcube->mapScan = pcube->mapScan | 8;
 	}
-	if (mapdata->getData(x, y, z + 1) == 1 mapdata.count(cube_data + 10000)) {
+	if (mapdata->getData(x, y, z + 1) == 1) {
 		pcube->mapScan = pcube->mapScan | 16;
 	}
-	if (mapdata->getData(x + 1, y - 1, z) == 1 mapdata.count(cube_data - 99)) {
+	if (mapdata->getData(x + 1, y - 1, z) == 1) {
 		pcube->mapScan = pcube->mapScan | 32;
 	}
-	if (mapdata->getData(x - 1, y - 1, z) == 1 mapdata.count(cube_data - 101)) {
+	if (mapdata->getData(x - 1, y - 1, z) == 1) {
 		pcube->mapScan = pcube->mapScan | 64;
 	}
-	if (mapdata->getData(x - 1, y + 1, z) == 1 mapdata.count(cube_data + 99)) {
+	if (mapdata->getData(x + 1, y + 1, z) == 1) {
 		pcube->mapScan = pcube->mapScan | 128;
 	}
-	if (mapdata->getData(x + 1, y + 1, z) == 1 mapdata.count(cube_data + 101)) {
+	if (mapdata->getData(x - 1, y + 1, z) == 1) {
 		pcube->mapScan = pcube->mapScan | 256;
 	}
-	if (mapdata->getData(x, y - 1, z - 1) == 1 mapdata.count(cube_data - 10100)) {
+	if (mapdata->getData(x, y - 1, z - 1) == 1) {
 		pcube->mapScan = pcube->mapScan | 512;
 	}
-	if (mapdata->getData(x, y - 1, z + 1) == 1 mapdata.count(cube_data + 9900)) {
+	if (mapdata->getData(x, y - 1, z + 1) == 1) {
 		pcube->mapScan = pcube->mapScan | 1024;
 	}
-	if (mapdata->getData(x, y + 1, z - 1) == 1 mapdata.count(cube_data - 9900)) {
+	if (mapdata->getData(x, y + 1, z - 1) == 1) {
 		pcube->mapScan = pcube->mapScan | 2048;
 	}
-	if (mapdata->getData(x, y + 1, z + 1) == 1 mapdata.count(cube_data + 10100)) {
+	if (mapdata->getData(x, y + 1, z + 1) == 1) {
 		pcube->mapScan = pcube->mapScan | 4096;
 	}
+}
+
+void SetOffset(int x, int y, int z) {
+	pcube->xangle += 90 * x;
+	pcube->yangle += 90 * y;
+	pcube->zangle += 90 * z;
+	pcube->position.x += x;
+	pcube->position.y += y;
+	pcube->position.z += z;
 }

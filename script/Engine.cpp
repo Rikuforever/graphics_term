@@ -44,6 +44,7 @@ bool Engine::init()
 
 	// Set scene
 	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, 10.0f));
+	//mCam.setPosition(glm::vec3(0.0f, 0.0f, 20.0f));
 	mCam.setLookAt(mObjPlayer.position);
 	mLightDir.direction = glm::vec3(-1.0f, -2.0f, -3.0f);
 	mLightDir.ambient = glm::vec3(0.2f, 0.2f, 0.2f);
@@ -52,14 +53,20 @@ bool Engine::init()
 
 
 	// Set objects
-	mObjFloor.position = glm::vec3(0.0f, -1.0f, 0.0f);
+	mObjPlayer.scale = glm::vec3(0.5f, 0.5f, 0.5f);
+	mObjFloor.position = glm::vec3(0.0f, -0.5f, 0.0f);
 	mObjFloor.scale = glm::vec3(10.0f, 0.01f, 10.0f);
 
 	// Construct Map
-	mObjMap.setData(0, 0, 0, 1);
-	mObjMap.setData(1, 0, 0, 1);
-	mObjMap.setData(0, 1, 0, 1);
-	mObjMap.setData(0, 0, 1, 1);
+	mObjMap.setData( 0+1, -1+1,  0+1, 1);
+	//mObjMap.setData( 1+1, -1+1,  0+1, 1);
+	//mObjMap.setData( 2+1,  0+1,  0+1, 1);
+	//mObjMap.setData( 0+1, -1+1,  1+1, 1);
+	//mObjMap.setData( 0+1,  0+1,  2+1, 1);
+	//mObjMap.setData( 2+1, -1+1,  0+1, 1);
+	//mObjMap.setData( 3+1, -1+1,  0+1, 1);
+	//mObjMap.setData(-1+1,  0+1,  0+1, 1);
+	//mObjMap.setData(-1+1,  1+1,  0+1, 1);
 	mObjMap.load();
 	// Set Map
 	mMaterialMap.ambient = glm::vec3(0.1f, 0.1f, 0.1f);
@@ -68,7 +75,7 @@ bool Engine::init()
 	mMaterialMap.shininess = 500.0f;
 
 	mapdata = &mObjMap;
-
+	SetOffset(1, 1, 1);
 	return true;
 }
 
@@ -105,10 +112,12 @@ void Engine::update()
 	if (keyStates['s'] || keyStates['S'])
 		mObjPlayer.position.z += (float)(deltaTime * 5.0f);
 	*/
-	
 	DefineCubeLine(pcube);
 	Move(pcube);
 	mObjPlayer.position = pcube->position;
+	// printf("x: %f\n y: %f\n z: %f\n\n", mObjPlayer.position.x, mObjPlayer.position.y, mObjPlayer.position.z);
+	if(pcube->cstatus==Climbing)
+	printf("climbing  %d\n\n",pcube->mapScan);
 	int rnum = (int)(cube.full_z_angle / 90) % 4;
 	switch (rnum) {
 	case 0:
@@ -125,7 +134,9 @@ void Engine::update()
 		break;
 	}
 
-	mCam.move(mObjPlayer.position - previousPosition);
+
+	printf_s("%d, %d\n", pcube->mapScan, pcube->xangle);
+	//mCam.move(mObjPlayer.position - previousPosition);
 
 	// mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, -10.0f));
 	// mCam.setLookAt(mObjPlayer.position);
@@ -198,7 +209,6 @@ void Engine::specialKeyboard(int key, int x, int y)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		break;
 	}
-
 }
 
 void Engine::idle()

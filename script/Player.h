@@ -11,7 +11,7 @@ enum CubeStatus { Moving, Climbing, Falling };
 struct Cube
 {
 	GameObject* objPtr;
-	float ad_angle = 3.0f;
+	float ad_angle = 1.0f;
 	float full_x_angle = 0;
 	float full_z_angle = 0;
 	float xangle=0;

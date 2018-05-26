@@ -211,6 +211,81 @@ void GameMap::load()
 
 		#pragma endregion
 
+#pragma region fourthMap
+			setData(40, 40, 40, 1);
+			setData(40, 40, 39, 1);
+			setData(40, 41, 38, 1);
+			setData(40, 42, 37, 1);
+			setData(40, 40, 36, 1);
+
+			setData(40, 41, 35, 1);
+			setData(40, 42, 34, 1);
+			setData(40, 43, 33, 1);
+			setData(40, 44, 32, 1);
+			setData(40, 45, 31, 1);
+			setData(40, 46, 30, 1);
+			setData(40, 47, 29, 1);
+
+			setData(41, 48, 29, 1);
+			setData(42, 49, 29, 1);
+			setData(43, 50, 29, 1);
+			setData(44, 51, 29, 1);
+			setData(45, 52, 29, 1);
+			setData(46, 53, 29, 1);
+			setData(47, 54, 29, 1);
+
+			setData(47, 55, 30, 1);
+			setData(47, 56, 31, 1);
+			setData(47, 57, 32, 1);
+			setData(47, 58, 33, 1);
+			setData(47, 59, 34, 1);
+			setData(47, 60, 35, 1);
+			setData(47, 61, 36, 1);
+
+			setData(46, 62, 36, 1);
+			setData(45, 63, 36, 1);
+			setData(44, 64, 36, 1);
+			setData(43, 65, 36, 1);
+
+			setData(43, 65, 37, 1);
+			setData(43, 65, 38, 1);
+			setData(43, 65, 39, 1);
+			setData(42, 65, 39, 1);
+			setData(44, 65, 39, 1);
+
+			setData(44, 55, 40, 1);
+			setData(44, 55, 41, 1);
+			setData(44, 55, 42, 1);
+			setData(44, 55, 43, 1);
+
+			setData(42, 50, 40, 1);
+			setData(43, 50, 40, 1);
+			setData(44, 50, 40, 1);
+			setData(41, 50, 40, 1);
+			setData(45, 50, 40, 1);
+			setData(41, 50, 39, 1);
+			setData(42, 50, 39, 1);
+			setData(43, 50, 39, 1);
+			setData(44, 50, 39, 1);
+			setData(45, 50, 39, 1);
+			setData(41, 50, 38, 1);
+			setData(42, 50, 38, 1);
+			setData(43, 50, 38, 1);
+			setData(44, 50, 38, 1);
+			setData(45, 50, 38, 1);
+
+			setData(43, 50, 38, 1);
+			setData(43, 50, 37, 1);
+			setData(43, 50, 36, 1);
+			setData(43, 50, 35, 1);
+			setData(43, 50, 34, 1);
+			setData(43, 50, 33, 1);
+			setData(43, 50, 32, 1);
+			setData(43, 50, 31, 1);
+			setData(43, 50, 30, 1);
+
+#pragma endregion
+
 	#pragma endregion
 	
 	std::vector<glm::vec3> posList;

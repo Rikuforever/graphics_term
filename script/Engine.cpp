@@ -4,6 +4,7 @@
 
 #include "GL/glut.h"
 
+
 Engine::Engine()
 {
 }
@@ -47,7 +48,7 @@ bool Engine::init()
 	//mCam.setPosition(glm::vec3(0.0f, 0.0f, 20.0f));
 	mCam.setLookAt(mObjPlayer.position);
 	mLightDir.direction = glm::vec3(-1.0f, -2.0f, -3.0f);
-	mLightDir.ambient = glm::vec3(0.2f, 0.2f, 0.2f);
+	mLightDir.ambient = glm::vec3(0.3f, 0.3f, 0.3f);
 	mLightDir.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	mLightDir.specular = glm::vec3(1.0f, 1.0f, 1.0f);
 
@@ -58,24 +59,129 @@ bool Engine::init()
 	mObjFloor.scale = glm::vec3(10.0f, 0.01f, 10.0f);
 
 	// Construct Map
-	mObjMap.setData( 0+1, -1+1,  0+1, 1);
-	//mObjMap.setData( 1+1, -1+1,  0+1, 1);
-	//mObjMap.setData( 2+1,  0+1,  0+1, 1);
-	//mObjMap.setData( 0+1, -1+1,  1+1, 1);
-	//mObjMap.setData( 0+1,  0+1,  2+1, 1);
-	//mObjMap.setData( 2+1, -1+1,  0+1, 1);
-	//mObjMap.setData( 3+1, -1+1,  0+1, 1);
-	//mObjMap.setData(-1+1,  0+1,  0+1, 1);
-	//mObjMap.setData(-1+1,  1+1,  0+1, 1);
+#pragma region MapData
+
+#pragma region mainmap
+	mObjMap.setData( 0, 0, 10, 1);
+	mObjMap.setData( 0, 1, 10, 1);
+	mObjMap.setData( 0, 2, 10, 1);
+	mObjMap.setData( 0, 3, 10, 1);
+	mObjMap.setData( 1, 0, 10, 1);
+	mObjMap.setData( 2, 0, 10, 1);
+	mObjMap.setData( 3, 0, 10, 1);
+	mObjMap.setData( 4, 0, 10, 1);
+	mObjMap.setData( 5, 0, 10, 1);
+	mObjMap.setData( 6, 0, 10, 1);
+	mObjMap.setData( 7, 1, 10, 1);
+	mObjMap.setData( 8, 2, 10, 1);
+	mObjMap.setData( 9, 3, 10, 1);
+	mObjMap.setData( 9, 4,  9, 1);
+	mObjMap.setData( 9, 5,  8, 1);
+	mObjMap.setData( 9, 6,  7, 1);
+	mObjMap.setData( 9, 6,  6, 1);
+	mObjMap.setData( 9, 6,  5, 1);
+	mObjMap.setData( 9, 6,  4, 1);
+	mObjMap.setData( 9, 6,  3, 1);
+	mObjMap.setData( 8, 7,  3, 1);
+	mObjMap.setData( 7, 8,  3, 1);
+	mObjMap.setData( 6, 9,  3, 1);
+	mObjMap.setData( 5, 10, 3, 1);
+	mObjMap.setData( 4, 10, 3, 1);
+	mObjMap.setData( 3, 10, 3, 1);
+	mObjMap.setData( 2, 10, 3, 1);
+	mObjMap.setData( 1, 10, 3, 1);
+	mObjMap.setData( 0, 10, 3, 1);
+	mObjMap.setData( 0, 9,  4, 1);
+	mObjMap.setData( 0, 8,  5, 1);
+	mObjMap.setData( 0, 7,  6, 1);
+	mObjMap.setData( 0, 6,  7, 1);
+	mObjMap.setData( 0, 6,  8, 1);
+	mObjMap.setData( 0, 6,  9, 1);
+#pragma endregion
+#pragma region root2
+	mObjMap.setData(  4, 1, 11, 1);
+	mObjMap.setData(  4, 2, 12, 1);
+	mObjMap.setData(  4, 3, 13, 1);
+	mObjMap.setData(  4, 4, 14, 1);
+	mObjMap.setData(  5, 3, 14, 1);
+	mObjMap.setData(  6, 2, 14, 1);
+	mObjMap.setData(  7, 1, 14, 1);
+	mObjMap.setData(  8, 1, 14, 1);
+	mObjMap.setData(  9, 1, 14, 1);
+	mObjMap.setData( 10, 1, 14, 1);
+	mObjMap.setData( 11, 1, 14, 1);
+	mObjMap.setData( 11, 1, 13, 1);
+	mObjMap.setData( 11, 1, 12, 1);
+	mObjMap.setData( 12, 1, 12, 1);
+	mObjMap.setData( 12, 1, 11, 1);
+	mObjMap.setData( 12, 1, 10, 1);
+	mObjMap.setData( 13, 1, 10, 1);
+	mObjMap.setData( 13, 1,  9, 1);
+	mObjMap.setData( 13, 1,  8, 1);
+	mObjMap.setData( 14, 1,  8, 1);
+	mObjMap.setData( 14, 1,  7, 1);
+	mObjMap.setData( 14, 1,  6, 1);
+	mObjMap.setData( 14, 2,  6, 1);
+	mObjMap.setData( 13, 3,  6, 1);
+	mObjMap.setData( 12, 4,  6, 1);
+	mObjMap.setData( 11, 5,  6, 1);
+	mObjMap.setData( 10, 6,  6, 1);
+#pragma endregion
+#pragma region trashmap
+	mObjMap.setData( 1,  1, 11, 1);
+	mObjMap.setData( 1,  1,  9, 1);
+	mObjMap.setData( 2,  1, 11, 1);
+	mObjMap.setData( 2,  1,  9, 1);
+	mObjMap.setData( 3,  1, 11, 1);
+	mObjMap.setData( 3,  1,  9, 1);
+	mObjMap.setData( 4,  1,  9, 1);
+	mObjMap.setData( 5,  1, 11, 1);
+	mObjMap.setData( 5,  1,  9, 1);
+	mObjMap.setData( 6,  1, 11, 1);
+	mObjMap.setData( 6,  1,  9, 1);
+	mObjMap.setData( 7,  2, 11, 1);
+	mObjMap.setData( 7,  2,  9, 1);
+	mObjMap.setData( 8,  3, 11, 1);
+	mObjMap.setData( 8,  3,  9, 1);
+	mObjMap.setData( 9,  7,  2, 1);
+	mObjMap.setData( 9,  8,  2, 1);
+	mObjMap.setData( 6, 10,  2, 1);
+	mObjMap.setData( 6, 11,  2, 1);
+	mObjMap.setData( 7,  9,  2, 1);
+	mObjMap.setData( 7, 10,  2, 1);
+	mObjMap.setData( 8,  8,  2, 1);
+	mObjMap.setData( 8,  9,  2, 1);
+	mObjMap.setData( 5, 11,  2, 1);
+	mObjMap.setData( 5, 12,  2, 1);
+	mObjMap.setData( 4, 11,  2, 1);
+	mObjMap.setData( 4, 12,  2, 1);
+	mObjMap.setData( 3, 11,  2, 1);
+	mObjMap.setData( 3, 12,  2, 1);
+	mObjMap.setData( 2, 11,  2, 1);
+	mObjMap.setData( 2, 12,  2, 1);
+	mObjMap.setData( 1, 11,  2, 1);
+	mObjMap.setData( 1, 12,  2, 1);
+	mObjMap.setData( 0, 11,  2, 1);
+	mObjMap.setData( 0, 12,  2, 1);
+	mObjMap.setData( 6, 12,  2, 1);
+	mObjMap.setData( 7, 11,  2, 1);
+	mObjMap.setData( 7, 12,  2, 1);
+	mObjMap.setData( 8, 12,  2, 1);
+	mObjMap.setData( 8, 11,  2, 1);
+	mObjMap.setData( 8, 10,  2, 1);
+	mObjMap.setData( 9, 12,  2, 1);
+	mObjMap.setData( 9, 11,  2, 1);
+	mObjMap.setData( 9, 10,  2, 1);
+	mObjMap.setData( 9,  9,  2, 1);
+#pragma endregion
+
+#pragma endregion
 	mObjMap.load();
 	// Set Map
-	mMaterialMap.ambient = glm::vec3(0.1f, 0.1f, 0.1f);
-	mMaterialMap.diffuse = glm::vec3(0.6f, 0.0f, 0.0f);
-	mMaterialMap.specular = glm::vec3(0.8f, 0.8f, 0.8f);
-	mMaterialMap.shininess = 500.0f;
-
-	mapdata = &mObjMap;
-	SetOffset(1, 1, 1);
+	mMaterialMap.ambient = glm::vec3(0.1f, 0.35f, 0.1f);
+	mMaterialMap.diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
+	mMaterialMap.specular = glm::vec3(0.45f, 0.55f, 0.45f);
+	mMaterialMap.shininess = 32.0f;
 	return true;
 }
 
@@ -137,6 +243,56 @@ void Engine::update()
 
 	printf_s("%d, %d\n", pcube->mapScan, pcube->xangle);
 	//mCam.move(mObjPlayer.position - previousPosition);
+
+	//cube color (diffuse) change
+#pragma region cube color (diffuse) change
+	static float timer = 0;
+
+	if (timer >= 1.0) {
+		timer = 0;
+		if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 0.0 && mMaterialMap.diffuse.z == 0.0) {
+			mMaterialMap.diffuse.x = 1.0;
+			mMaterialMap.diffuse.y = 0.5;
+			mMaterialMap.diffuse.z = 0.0;
+		}
+		else if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 0.5 && mMaterialMap.diffuse.z == 0.0) {
+			mMaterialMap.diffuse.x = 1.0;
+			mMaterialMap.diffuse.y = 1.0;
+			mMaterialMap.diffuse.z = 0.0;
+		}
+		else if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 1.0 && mMaterialMap.diffuse.z == 0.0) {
+			mMaterialMap.diffuse.x = 0.0;
+			mMaterialMap.diffuse.y = 1.0;
+			mMaterialMap.diffuse.z = 0.0;
+		}
+		else if (mMaterialMap.diffuse.x == 0.0 && mMaterialMap.diffuse.y == 1.0 && mMaterialMap.diffuse.z == 0.0) {
+			mMaterialMap.diffuse.x = 0.0;
+			mMaterialMap.diffuse.y = 1.0;
+			mMaterialMap.diffuse.z = 1.0;
+		}
+		else if (mMaterialMap.diffuse.x == 0.0 && mMaterialMap.diffuse.y == 1.0 && mMaterialMap.diffuse.z == 1.0) {
+			mMaterialMap.diffuse.x = 0.0;
+			mMaterialMap.diffuse.y = 0.0;
+			mMaterialMap.diffuse.z = 1.0;
+		}
+		else if (mMaterialMap.diffuse.x == 0.0 && mMaterialMap.diffuse.y == 0.0 && mMaterialMap.diffuse.z == 1.0) {
+			mMaterialMap.diffuse.x = 1.0;
+			mMaterialMap.diffuse.y = 0.0;
+			mMaterialMap.diffuse.z = 1.0;
+		}
+		else if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 0.0 && mMaterialMap.diffuse.z == 1.0) {
+			mMaterialMap.diffuse.x = 1.0;
+			mMaterialMap.diffuse.y = 0.0;
+			mMaterialMap.diffuse.z = 0.0;
+		}
+
+	}
+	else {
+		timer += deltaTime;
+	}
+#pragma endregion
+
+
 
 	// mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, -10.0f));
 	// mCam.setLookAt(mObjPlayer.position);

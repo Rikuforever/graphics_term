@@ -1,4 +1,6 @@
 ﻿#include "Engine.h"
+#include "Player.h"
+
 
 #include "GL/glut.h"
 
@@ -65,6 +67,8 @@ bool Engine::init()
 	mMaterialMap.specular = glm::vec3(0.8f, 0.8f, 0.8f);
 	mMaterialMap.shininess = 500.0f;
 
+	mapdata = &mObjMap;
+
 	return true;
 }
 
@@ -75,7 +79,23 @@ void Engine::update()
 
 	// update	
 	glm::vec3 previousPosition = glm::vec3(mObjPlayer.position);
-
+	
+	if (keyStates['d'] || keyStates['D']) {
+		keymode = 'd';
+	}
+	else if (keyStates['w'] || keyStates['W']) {
+		keymode = 'w';
+	}
+	else if (keyStates['a'] || keyStates['A']) {
+		keymode = 'a';
+	}
+	else if (keyStates['s'] || keyStates['S']) {
+		keymode = 's';
+	}
+	else {
+		keymode = 'f';
+	}
+	/*
 	if (keyStates['a'] || keyStates['A'])
 		mObjPlayer.position.x -= (float)(deltaTime * 5.0f);
 	if (keyStates['d'] || keyStates['D']) 
@@ -84,6 +104,26 @@ void Engine::update()
 		mObjPlayer.position.z -= (float)(deltaTime * 5.0f);
 	if (keyStates['s'] || keyStates['S'])
 		mObjPlayer.position.z += (float)(deltaTime * 5.0f);
+	*/
+	
+	DefineCubeLine(pcube);
+	Move(pcube);
+	mObjPlayer.position = pcube->position;
+	int rnum = (int)(cube.full_z_angle / 90) % 4;
+	switch (rnum) {
+	case 0:
+		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, 0.0f, -cube.full_x_angle);
+		break;
+	case 1:
+		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, -cube.full_x_angle, 0.0f);
+		break;
+	case 2:
+		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, 0.0f, cube.full_x_angle);
+		break;
+	case 3:
+		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, cube.full_x_angle, 0.0f);
+		break;
+	}
 
 	mCam.move(mObjPlayer.position - previousPosition);
 
@@ -100,7 +140,7 @@ void Engine::render()
 	glLoadIdentity();
 
 	// render
-	//mObjPlayer.draw();
+	mObjPlayer.draw();
 	//mObjFloor.draw();
 	mObjMap.draw();
 

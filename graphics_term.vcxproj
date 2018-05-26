@@ -36,6 +36,7 @@
     <ClInclude Include="script\GameObject.h" />
     <ClInclude Include="script\Light.h" />
     <ClInclude Include="script\Material.h" />
+    <ClInclude Include="script\Player.h" />
     <ClInclude Include="script\ShaderProgram.h" />
     <ClInclude Include="script\Texture2D.h" />
   </ItemGroup>

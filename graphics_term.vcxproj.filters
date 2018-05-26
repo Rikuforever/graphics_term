@@ -68,6 +68,9 @@
     <ClInclude Include="script\Light.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="script\Player.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\shaders\basic.frag">

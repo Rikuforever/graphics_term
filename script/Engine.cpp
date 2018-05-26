@@ -1,4 +1,6 @@
 ﻿#include "Engine.h"
+#include "Player.h"
+
 
 #include "GL/glut.h"
 
@@ -43,6 +45,7 @@ bool Engine::init()
 
 	// Set scene
 	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, 10.0f));
+	//mCam.setPosition(glm::vec3(0.0f, 0.0f, 20.0f));
 	mCam.setLookAt(mObjPlayer.position);
 	mLightDir.direction = glm::vec3(-1.0f, -2.0f, -3.0f);
 	mLightDir.ambient = glm::vec3(0.3f, 0.3f, 0.3f);
@@ -51,7 +54,8 @@ bool Engine::init()
 
 
 	// Set objects
-	mObjFloor.position = glm::vec3(0.0f, -1.0f, 0.0f);
+	mObjPlayer.scale = glm::vec3(0.5f, 0.5f, 0.5f);
+	mObjFloor.position = glm::vec3(0.0f, -0.5f, 0.0f);
 	mObjFloor.scale = glm::vec3(10.0f, 0.01f, 10.0f);
 
 	// Construct Map
@@ -263,7 +267,23 @@ void Engine::update()
 
 	// update	
 	glm::vec3 previousPosition = glm::vec3(mObjPlayer.position);
-
+	
+	if (keyStates['d'] || keyStates['D']) {
+		keymode = 'd';
+	}
+	else if (keyStates['w'] || keyStates['W']) {
+		keymode = 'w';
+	}
+	else if (keyStates['a'] || keyStates['A']) {
+		keymode = 'a';
+	}
+	else if (keyStates['s'] || keyStates['S']) {
+		keymode = 's';
+	}
+	else {
+		keymode = 'f';
+	}
+	/*
 	if (keyStates['a'] || keyStates['A'])
 		mObjPlayer.position.x -= (float)(deltaTime * 5.0f);
 	if (keyStates['d'] || keyStates['D']) 
@@ -272,12 +292,32 @@ void Engine::update()
 		mObjPlayer.position.z -= (float)(deltaTime * 5.0f);
 	if (keyStates['s'] || keyStates['S'])
 		mObjPlayer.position.z += (float)(deltaTime * 5.0f);
-	if (keyStates['q'] || keyStates['Q'])
-		mObjPlayer.position.y += (float)(deltaTime * 5.0f);
-	if (keyStates['e'] || keyStates['E'])
-		mObjPlayer.position.y -= (float)(deltaTime * 5.0f);
+	*/
+	DefineCubeLine(pcube);
+	Move(pcube);
+	mObjPlayer.position = pcube->position;
+	// printf("x: %f\n y: %f\n z: %f\n\n", mObjPlayer.position.x, mObjPlayer.position.y, mObjPlayer.position.z);
+	if(pcube->cstatus==Climbing)
+	printf("climbing  %d\n\n",pcube->mapScan);
+	int rnum = (int)(cube.full_z_angle / 90) % 4;
+	switch (rnum) {
+	case 0:
+		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, 0.0f, -cube.full_x_angle);
+		break;
+	case 1:
+		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, -cube.full_x_angle, 0.0f);
+		break;
+	case 2:
+		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, 0.0f, cube.full_x_angle);
+		break;
+	case 3:
+		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, cube.full_x_angle, 0.0f);
+		break;
+	}
 
-	mCam.move(mObjPlayer.position - previousPosition);
+
+	printf_s("%d, %d\n", pcube->mapScan, pcube->xangle);
+	//mCam.move(mObjPlayer.position - previousPosition);
 
 	//cube color (diffuse) change
 #pragma region cube color (diffuse) change
@@ -400,7 +440,6 @@ void Engine::specialKeyboard(int key, int x, int y)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		break;
 	}
-
 }
 
 void Engine::idle()

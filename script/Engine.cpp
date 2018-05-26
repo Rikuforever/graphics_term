@@ -62,6 +62,8 @@ bool Engine::init()
 	mObjMap.setData( 0, 1, 10, 1);
 	mObjMap.setData( 0, 2, 10, 1);
 	mObjMap.setData( 0, 3, 10, 1);
+	mObjMap.setData( 0, 3,  9, 1);
+	mObjMap.setData( 0, 3, 11, 1);
 	mObjMap.setData( 1, 0, 10, 1);
 	mObjMap.setData( 2, 0, 10, 1);
 	mObjMap.setData( 3, 0, 10, 1);
@@ -171,6 +173,79 @@ bool Engine::init()
 	mObjMap.setData( 9,  9,  2, 1);
 #pragma endregion
 
+#pragma region secondMap
+	mObjMap.setData(20, 20, 20, 1);
+	mObjMap.setData(20, 20, 19, 1);
+	mObjMap.setData(20, 20, 21, 1);
+	mObjMap.setData(19, 20, 20, 1);
+	mObjMap.setData(19, 20, 19, 1);
+	mObjMap.setData(19, 20, 21, 1);
+	mObjMap.setData(21, 20, 20, 1);
+	mObjMap.setData(22, 20, 20, 1);
+	mObjMap.setData(23, 21, 20, 1);
+	mObjMap.setData(24, 22, 20, 1);
+	mObjMap.setData(24, 22, 19, 1);
+	mObjMap.setData(24, 22, 18, 1);
+	mObjMap.setData(25, 22, 18, 1);
+	mObjMap.setData(26, 21, 18, 1);
+	mObjMap.setData(27, 20, 18, 1);
+	mObjMap.setData(28, 17, 17, 1);
+	mObjMap.setData(28, 17, 18, 1);
+	mObjMap.setData(28, 17, 19, 1);
+	mObjMap.setData(27, 17, 17, 1);
+	mObjMap.setData(27, 17, 18, 1);
+	mObjMap.setData(27, 17, 19, 1);
+	mObjMap.setData(29, 17, 17, 1);
+	mObjMap.setData(29, 17, 18, 1);
+	mObjMap.setData(29, 17, 19, 1);
+#pragma endregion
+
+#pragma region firstMap
+	mObjMap.setData(20, 30, 30, 1);
+	mObjMap.setData(21, 30, 30, 1);
+	mObjMap.setData(22, 30, 30, 1);
+	mObjMap.setData(23, 30, 30, 1);
+	mObjMap.setData(24, 30, 30, 1);
+	mObjMap.setData(20, 30, 31, 1);
+	mObjMap.setData(21, 30, 31, 1);
+	mObjMap.setData(22, 30, 31, 1);
+	mObjMap.setData(23, 30, 31, 1);
+	mObjMap.setData(24, 30, 31, 1);
+	mObjMap.setData(20, 30, 32, 1);
+	mObjMap.setData(21, 30, 32, 1);
+	mObjMap.setData(22, 30, 32, 1);
+	mObjMap.setData(23, 30, 32, 1);
+	mObjMap.setData(24, 30, 32, 1);
+	mObjMap.setData(20, 30, 33, 1);
+	mObjMap.setData(21, 30, 33, 1);
+	mObjMap.setData(22, 30, 33, 1);
+	mObjMap.setData(23, 30, 33, 1);
+	mObjMap.setData(24, 30, 33, 1);
+	mObjMap.setData(20, 30, 34, 1);
+	mObjMap.setData(21, 30, 34, 1);
+	mObjMap.setData(22, 30, 34, 1);
+	mObjMap.setData(23, 30, 34, 1);
+	mObjMap.setData(24, 30, 34, 1);
+	mObjMap.setData(25, 30, 32, 1);
+	mObjMap.setData(26, 30, 32, 1);
+	mObjMap.setData(27, 30, 32, 1);
+	mObjMap.setData(28, 30, 32, 1);
+	mObjMap.setData(28, 30, 33, 1);
+	mObjMap.setData(28, 30, 34, 1);
+	mObjMap.setData(28, 30, 35, 1);
+	mObjMap.setData(28, 30, 36, 1);
+	mObjMap.setData(28, 30, 37, 1);
+	mObjMap.setData(27, 30, 37, 1);
+	mObjMap.setData(26, 30, 37, 1);
+	mObjMap.setData(25, 30, 37, 1);
+	mObjMap.setData(24, 30, 37, 1);
+	mObjMap.setData(23, 30, 37, 1);
+	mObjMap.setData(22, 30, 37, 1);
+	mObjMap.setData(21, 30, 37, 1);
+	mObjMap.setData(21, 30, 36, 1);
+
+#pragma endregion
+
 #pragma endregion
 	mObjMap.load();
 	// Set Map
@@ -197,6 +272,10 @@ void Engine::update()
 		mObjPlayer.position.z -= (float)(deltaTime * 5.0f);
 	if (keyStates['s'] || keyStates['S'])
 		mObjPlayer.position.z += (float)(deltaTime * 5.0f);
+	if (keyStates['q'] || keyStates['Q'])
+		mObjPlayer.position.y += (float)(deltaTime * 5.0f);
+	if (keyStates['e'] || keyStates['E'])
+		mObjPlayer.position.y -= (float)(deltaTime * 5.0f);
 
 	mCam.move(mObjPlayer.position - previousPosition);
 

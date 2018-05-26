@@ -2,6 +2,7 @@
 
 #include "GL/glut.h"
 
+
 Engine::Engine()
 {
 }
@@ -174,10 +175,9 @@ bool Engine::init()
 	mObjMap.load();
 	// Set Map
 	mMaterialMap.ambient = glm::vec3(0.1f, 0.35f, 0.1f);
-	mMaterialMap.diffuse = glm::vec3(0.8f, 0.1f, 0.35f);
+	mMaterialMap.diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
 	mMaterialMap.specular = glm::vec3(0.45f, 0.55f, 0.45f);
 	mMaterialMap.shininess = 32.0f;
-
 	return true;
 }
 
@@ -200,6 +200,56 @@ void Engine::update()
 
 	mCam.move(mObjPlayer.position - previousPosition);
 
+	//cube color (diffuse) change
+#pragma region cube color (diffuse) change
+	static float timer = 0;
+
+	if (timer >= 1.0) {
+		timer = 0;
+		if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 0.0 && mMaterialMap.diffuse.z == 0.0) {
+			mMaterialMap.diffuse.x = 1.0;
+			mMaterialMap.diffuse.y = 0.5;
+			mMaterialMap.diffuse.z = 0.0;
+		}
+		else if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 0.5 && mMaterialMap.diffuse.z == 0.0) {
+			mMaterialMap.diffuse.x = 1.0;
+			mMaterialMap.diffuse.y = 1.0;
+			mMaterialMap.diffuse.z = 0.0;
+		}
+		else if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 1.0 && mMaterialMap.diffuse.z == 0.0) {
+			mMaterialMap.diffuse.x = 0.0;
+			mMaterialMap.diffuse.y = 1.0;
+			mMaterialMap.diffuse.z = 0.0;
+		}
+		else if (mMaterialMap.diffuse.x == 0.0 && mMaterialMap.diffuse.y == 1.0 && mMaterialMap.diffuse.z == 0.0) {
+			mMaterialMap.diffuse.x = 0.0;
+			mMaterialMap.diffuse.y = 1.0;
+			mMaterialMap.diffuse.z = 1.0;
+		}
+		else if (mMaterialMap.diffuse.x == 0.0 && mMaterialMap.diffuse.y == 1.0 && mMaterialMap.diffuse.z == 1.0) {
+			mMaterialMap.diffuse.x = 0.0;
+			mMaterialMap.diffuse.y = 0.0;
+			mMaterialMap.diffuse.z = 1.0;
+		}
+		else if (mMaterialMap.diffuse.x == 0.0 && mMaterialMap.diffuse.y == 0.0 && mMaterialMap.diffuse.z == 1.0) {
+			mMaterialMap.diffuse.x = 1.0;
+			mMaterialMap.diffuse.y = 0.0;
+			mMaterialMap.diffuse.z = 1.0;
+		}
+		else if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 0.0 && mMaterialMap.diffuse.z == 1.0) {
+			mMaterialMap.diffuse.x = 1.0;
+			mMaterialMap.diffuse.y = 0.0;
+			mMaterialMap.diffuse.z = 0.0;
+		}
+
+	}
+	else {
+		timer += deltaTime;
+	}
+#pragma endregion
+
+
+
 	// mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, -10.0f));
 	// mCam.setLookAt(mObjPlayer.position);
 
@@ -213,7 +263,7 @@ void Engine::render()
 	glLoadIdentity();
 
 	// render
-	//mObjPlayer.draw();
+	mObjPlayer.draw();
 	//mObjFloor.draw();
 	mObjMap.draw();
 

@@ -44,7 +44,7 @@ bool Engine::init()
 	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, 10.0f));
 	mCam.setLookAt(mObjPlayer.position);
 	mLightDir.direction = glm::vec3(-1.0f, -2.0f, -3.0f);
-	mLightDir.ambient = glm::vec3(0.2f, 0.2f, 0.2f);
+	mLightDir.ambient = glm::vec3(0.3f, 0.3f, 0.3f);
 	mLightDir.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	mLightDir.specular = glm::vec3(1.0f, 1.0f, 1.0f);
 
@@ -173,10 +173,10 @@ bool Engine::init()
 #pragma endregion
 	mObjMap.load();
 	// Set Map
-	mMaterialMap.ambient = glm::vec3(0.1f, 0.1f, 0.1f);
-	mMaterialMap.diffuse = glm::vec3(0.6f, 0.0f, 0.0f);
-	mMaterialMap.specular = glm::vec3(0.8f, 0.8f, 0.8f);
-	mMaterialMap.shininess = 500.0f;
+	mMaterialMap.ambient = glm::vec3(0.1f, 0.35f, 0.1f);
+	mMaterialMap.diffuse = glm::vec3(0.8f, 0.1f, 0.35f);
+	mMaterialMap.specular = glm::vec3(0.45f, 0.55f, 0.45f);
+	mMaterialMap.shininess = 32.0f;
 
 	return true;
 }

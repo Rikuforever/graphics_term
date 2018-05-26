@@ -9,6 +9,21 @@
 
 #define VERTICES_LENGTH 216
 
+struct coord
+{
+	int x, y, z;
+
+	bool operator == (const coord & o)
+	{
+		return x == o.x &&  y == o.y && z == o.z;
+	}
+
+	bool operator < (const coord &o) const
+	{
+		return x < o.x || (x == o.x && y < o.y) || (x == o.x && y == o.y && z < o.z);
+	}
+};
+
 class GameMap : public GameObject {
 public:
 	GameMap();
@@ -19,15 +34,17 @@ public:
 
 	int getData(int x, int y, int z);
 	void setData(int x, int y, int z, int value);
+
+
 private:
-	std::map<int, int> mData;
+	std::map<coord, int> mData;
 	glm::vec3 mDefaultPos;
 
 	std::vector<glm::vec3> mVertices;
 
-	int key(int x, int y, int z);
+	coord key(int x, int y, int z);
 	glm::vec3 getPosition(int x, int y, int z);
-	glm::vec3 getPosition(int keyValue);
+	glm::vec3 getPosition(coord keyValue);
 
 	GLfloat cubeVertices[VERTICES_LENGTH] = {
 		// position				// normal

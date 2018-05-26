@@ -20,7 +20,7 @@ void GameMap::load()
 	std::vector<glm::vec3> posList;
 
 	// convert map data into vec3 list
-	for (std::map<int, int>::iterator idata = mData.begin(); idata != mData.end(); idata++)
+	for (std::map<coord, int>::iterator idata = mData.begin(); idata != mData.end(); idata++)
 	{
 		if(idata->second == 1)
 		{
@@ -118,8 +118,8 @@ void GameMap::setData(int x, int y, int z, int value)
 	mData[key(x, y, z)] = value;
 }
 
-int GameMap::key(int x, int y, int z) {
-	return x + BASE * y + pow(BASE, 2) * z;
+coord GameMap::key(int x, int y, int z) {
+	return coord{ x, y, z};
 }
 
 glm::vec3 GameMap::getPosition(int x, int y, int z)
@@ -133,14 +133,8 @@ glm::vec3 GameMap::getPosition(int x, int y, int z)
 	return result;
 }
 
-glm::vec3 GameMap::getPosition(int keyValue)
+glm::vec3 GameMap::getPosition(coord keyValue)
 {
-	glm::vec3 result;
-
-	result.z = (float)keyValue / pow(BASE, 2) + mDefaultPos.z;
-	result.y = ((float)keyValue - key(0, 0, result.z)) / BASE + mDefaultPos.y;
-	result.x = ((float)keyValue - key(0, result.y, result.z)) + mDefaultPos.x;
-
-	return result;
+	return getPosition(keyValue.x, keyValue.y, keyValue.z);
 }
 

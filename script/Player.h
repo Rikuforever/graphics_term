@@ -15,7 +15,7 @@ struct Cube
 	float ad_angle = 1.0f;
 	float full_x_angle = 0;
 	float full_z_angle = 0;
-	float xangle = 0;
+	float xangle=0;
 	float yangle = 0;
 	float zangle = 0;
 	glm::vec3 position;
@@ -55,6 +55,7 @@ void DefineCubeLine(Cube* pcube) {
 	int tempx = (int)(pcube->full_x_angle) % 90;
 	int tempz = (int)(pcube->full_z_angle) % 90;
 	if (tempx == 0 && tempz == 0) {
+		SetDeltaPosition(pcube);
 		GetCubeCenter(pcube);
 		ScanMap(pcube);
 		CubeFall(pcube);
@@ -311,9 +312,9 @@ void SetDeltaPosition(Cube* pcube) {
 	if (pcube->full_z_angle<0) {
 		pcube->full_z_angle += 360;
 	}
-	pcube->dx = floor(cube.xangle / 90);
-	pcube->dy = floor(cube.yangle / 90);
-	pcube->dz = floor(cube.zangle / 90);
+	pcube->dx = pcube->xangle / 90.0;
+	pcube->dy = pcube->yangle / 90.0;
+	pcube->dz = pcube->zangle / 90.0;
 }
 
 

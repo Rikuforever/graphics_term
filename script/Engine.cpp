@@ -52,7 +52,7 @@ bool Engine::init()
 	mLightDir.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	mLightDir.specular = glm::vec3(1.0f, 1.0f, 1.0f);
 
-
+	
 	// Set objects
 	mObjPlayer.scale = glm::vec3(0.5f, 0.5f, 0.5f);
 	mObjFloor.position = glm::vec3(0.0f, -0.5f, 0.0f);
@@ -176,12 +176,17 @@ bool Engine::init()
 #pragma endregion
 
 #pragma endregion
+	mObjMap.setData(1, 0, 1,1);
 	mObjMap.load();
 	// Set Map
 	mMaterialMap.ambient = glm::vec3(0.1f, 0.35f, 0.1f);
 	mMaterialMap.diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
 	mMaterialMap.specular = glm::vec3(0.45f, 0.55f, 0.45f);
 	mMaterialMap.shininess = 32.0f;
+
+	mapdata = &mObjMap;
+	SetOffset(1, 1, 1);
+
 	return true;
 }
 
@@ -218,12 +223,14 @@ void Engine::update()
 	if (keyStates['s'] || keyStates['S'])
 		mObjPlayer.position.z += (float)(deltaTime * 5.0f);
 	*/
+	//printf("%f \n %f \n %f \n  xa1 : %f \n", pcube->position.x, pcube->position.y, pcube->position.z, pcube->xangle);
 	DefineCubeLine(pcube);
 	Move(pcube);
+	printf("mapscan : %d\n xangle : %f\n xpos : %f\n, ypos : %f\n dx : %f\n\n", pcube->mapScan,pcube->xangle,pcube->position.x,pcube->position.y,pcube->dx);
 	mObjPlayer.position = pcube->position;
 	// printf("x: %f\n y: %f\n z: %f\n\n", mObjPlayer.position.x, mObjPlayer.position.y, mObjPlayer.position.z);
-	if(pcube->cstatus==Climbing)
-	printf("climbing  %d\n\n",pcube->mapScan);
+	//if (pcube->cstatus == Climbing)
+	//printf("climbing  %d\n\n",pcube->mapScan);
 	int rnum = (int)(cube.full_z_angle / 90) % 4;
 	switch (rnum) {
 	case 0:
@@ -241,8 +248,8 @@ void Engine::update()
 	}
 
 
-	printf_s("%d, %d\n", pcube->mapScan, pcube->xangle);
-	//mCam.move(mObjPlayer.position - previousPosition);
+	//printf_s("%d, xa2 : %f\n\n", pcube->mapScan, pcube->xangle);
+	mCam.move(mObjPlayer.position - previousPosition);
 
 	//cube color (diffuse) change
 #pragma region cube color (diffuse) change

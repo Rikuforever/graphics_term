@@ -85,5 +85,11 @@
     <None Include="bin\shaders\map.vert">
       <Filter>리소스 파일</Filter>
     </None>
+    <None Include="bin\shaders\player.frag">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="bin\shaders\player.vert">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -16,57 +16,57 @@ GameObject::~GameObject()
 
 void GameObject::load()
 {
-	#pragma region TEMP DATA
+	#pragma region CUBE DATA
 	GLfloat vertices[] = {
-		// position		 // tex coords
+		// position				// tex coords	// normal
 
 		// front face
-		-1.0f,  1.0f,  1.0f, 0.0f, 1.0f,
-		1.0f, -1.0f,  1.0f, 1.0f, 0.0f,
-		1.0f,  1.0f,  1.0f, 1.0f, 1.0f,
-		-1.0f,  1.0f,  1.0f, 0.0f, 1.0f,
-		-1.0f, -1.0f,  1.0f, 0.0f, 0.0f,
-		1.0f, -1.0f,  1.0f, 1.0f, 0.0f,
+		-1.0f,  1.0f,  1.0f,	0.0f, 1.0f,		0.0f, 0.0f, 1.0f,
+		1.0f, -1.0f,  1.0f,		1.0f, 0.0f,		0.0f, 0.0f, 1.0f,
+		1.0f,  1.0f,  1.0f,		1.0f, 1.0f,		0.0f, 0.0f, 1.0f,
+		-1.0f,  1.0f,  1.0f,	0.0f, 1.0f,		0.0f, 0.0f, 1.0f,
+		-1.0f, -1.0f,  1.0f,	0.0f, 0.0f,		0.0f, 0.0f, 1.0f,
+		1.0f, -1.0f,  1.0f,		1.0f, 0.0f,		0.0f, 0.0f, 1.0f,
 
 		// back face
-		-1.0f,  1.0f, -1.0f, 0.0f, 1.0f,
-		1.0f, -1.0f, -1.0f, 1.0f, 0.0f,
-		1.0f,  1.0f, -1.0f, 1.0f, 1.0f,
-		-1.0f,  1.0f, -1.0f, 0.0f, 1.0f,
-		-1.0f, -1.0f, -1.0f, 0.0f, 0.0f,
-		1.0f, -1.0f, -1.0f, 1.0f, 0.0f,
+		-1.0f,  1.0f, -1.0f,	0.0f, 1.0f,		0.0f, 0.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,		1.0f, 0.0f,		0.0f, 0.0f, -1.0f,
+		1.0f,  1.0f, -1.0f,		1.0f, 1.0f,		0.0f, 0.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,	0.0f, 1.0f,		0.0f, 0.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,	0.0f, 0.0f,		0.0f, 0.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,		1.0f, 0.0f,		0.0f, 0.0f, -1.0f,
 
 		// left face
-		-1.0f,  1.0f, -1.0f, 0.0f, 1.0f,
-		-1.0f, -1.0f,  1.0f, 1.0f, 0.0f,
-		-1.0f,  1.0f,  1.0f, 1.0f, 1.0f,
-		-1.0f,  1.0f, -1.0f, 0.0f, 1.0f,
-		-1.0f, -1.0f, -1.0f, 0.0f, 0.0f,
-		-1.0f, -1.0f,  1.0f, 1.0f, 0.0f,
+		-1.0f,  1.0f, -1.0f,	0.0f, 1.0f,		-1.0f, 0.0f, 0.0f,
+		-1.0f, -1.0f,  1.0f,	1.0f, 0.0f,		-1.0f, 0.0f, 0.0f,
+		-1.0f,  1.0f,  1.0f,	1.0f, 1.0f,		-1.0f, 0.0f, 0.0f,
+		-1.0f,  1.0f, -1.0f,	0.0f, 1.0f,		-1.0f, 0.0f, 0.0f,
+		-1.0f, -1.0f, -1.0f,	0.0f, 0.0f,		-1.0f, 0.0f, 0.0f,
+		-1.0f, -1.0f,  1.0f,	1.0f, 0.0f,		-1.0f, 0.0f, 0.0f,
 
 		// right face
-		1.0f,  1.0f,  1.0f, 0.0f, 1.0f,
-		1.0f, -1.0f, -1.0f, 1.0f, 0.0f,
-		1.0f,  1.0f, -1.0f, 1.0f, 1.0f,
-		1.0f,  1.0f,  1.0f, 0.0f, 1.0f,
-		1.0f, -1.0f,  1.0f, 0.0f, 0.0f,
-		1.0f, -1.0f, -1.0f, 1.0f, 0.0f,
+		1.0f,  1.0f,  1.0f,		0.0f, 1.0f,		1.0f, 0.0f, 0.0f,
+		1.0f, -1.0f, -1.0f,		1.0f, 0.0f,		1.0f, 0.0f, 0.0f,
+		1.0f,  1.0f, -1.0f,		1.0f, 1.0f,		1.0f, 0.0f, 0.0f,
+		1.0f,  1.0f,  1.0f,		0.0f, 1.0f,		1.0f, 0.0f, 0.0f,
+		1.0f, -1.0f,  1.0f,		0.0f, 0.0f,		1.0f, 0.0f, 0.0f,
+		1.0f, -1.0f, -1.0f,		1.0f, 0.0f,		1.0f, 0.0f, 0.0f,
 
 		// top face
-		-1.0f,  1.0f, -1.0f, 0.0f, 1.0f,
-		1.0f,  1.0f,  1.0f, 1.0f, 0.0f,
-		1.0f,  1.0f, -1.0f, 1.0f, 1.0f,
-		-1.0f,  1.0f, -1.0f, 0.0f, 1.0f,
-		-1.0f,  1.0f,  1.0f, 0.0f, 0.0f,
-		1.0f,  1.0f,  1.0f, 1.0f, 0.0f,
+		-1.0f,  1.0f, -1.0f,	0.0f, 1.0f,		0.0f, 1.0f, 0.0f,
+		1.0f,  1.0f,  1.0f,		1.0f, 0.0f,		0.0f, 1.0f, 0.0f,
+		1.0f,  1.0f, -1.0f,		1.0f, 1.0f,		0.0f, 1.0f, 0.0f,
+		-1.0f,  1.0f, -1.0f,	0.0f, 1.0f,		0.0f, 1.0f, 0.0f,
+		-1.0f,  1.0f,  1.0f,	0.0f, 0.0f,		0.0f, 1.0f, 0.0f,
+		1.0f,  1.0f,  1.0f,		1.0f, 0.0f,		0.0f, 1.0f, 0.0f,
 
 		// bottom face
-		-1.0f, -1.0f,  1.0f, 0.0f, 1.0f,
-		1.0f, -1.0f, -1.0f, 1.0f, 0.0f,
-		1.0f, -1.0f,  1.0f, 1.0f, 1.0f,
-		-1.0f, -1.0f,  1.0f, 0.0f, 1.0f,
-		-1.0f, -1.0f, -1.0f, 0.0f, 0.0f,
-		1.0f, -1.0f, -1.0f, 1.0f, 0.0f,
+		-1.0f, -1.0f,  1.0f,	0.0f, 1.0f,		0.0f, -1.0f, 0.0f,
+		1.0f, -1.0f, -1.0f,		1.0f, 0.0f,		0.0f, -1.0f, 0.0f,
+		1.0f, -1.0f,  1.0f,		1.0f, 1.0f,		0.0f, -1.0f, 0.0f,
+		-1.0f, -1.0f,  1.0f,	0.0f, 1.0f,		0.0f, -1.0f, 0.0f,
+		-1.0f, -1.0f, -1.0f,	0.0f, 0.0f,		0.0f, -1.0f, 0.0f,
+		1.0f, -1.0f, -1.0f,		1.0f, 0.0f,		0.0f, -1.0f, 0.0f,
 	};
 #pragma endregion 
 
@@ -79,11 +79,14 @@ void GameObject::load()
 	glBindVertexArray(mVAO);
 
 	// Position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(0));
 	glEnableVertexAttribArray(0);
 	// Texture Coord attribute
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
+	// Normal Coord attribute
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
 
 	// Unbind buffer
 	glBindVertexArray(0);
@@ -91,10 +94,6 @@ void GameObject::load()
 
 void GameObject::draw()
 {
-	// Bind texture
-	if (mTexturePtr != nullptr)
-		mTexturePtr->bind(0);
-
 	// Bind shader
 	if(mShaderPtr != nullptr)
 	{
@@ -121,13 +120,17 @@ void GameObject::draw()
 			mMaterialPtr->setUniform(*mShaderPtr);
 	}
 
+	// Bind texture
+	if (mMaterialPtr != nullptr)
+		mMaterialPtr->bind();
+
 	glBindVertexArray(mVAO);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
 
 	// Unbind texture
-	if (mTexturePtr != nullptr)
-		mTexturePtr->unbind(0);
+	if (mMaterialPtr != nullptr)
+		mMaterialPtr->unbind();
 
 	// Unbind shader
 	if (mShaderPtr != nullptr)
@@ -141,11 +144,6 @@ void GameObject::bindEngine(Engine* enginePtr)
 
 void GameObject::bindShader(ShaderProgram & shader) {
 	mShaderPtr = &shader;
-}
-
-void GameObject::bindTexture(Texture2D & texture)
-{
-	mTexturePtr = &texture;
 }
 
 void GameObject::bindMaterial(Material& material)

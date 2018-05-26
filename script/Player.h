@@ -160,7 +160,6 @@ void Gravity(Cube* pcube) {
 					pcube->zangle -= pcube->ad_angle;
 				}
 				else {
-					printf("p\n");
 					pcube->full_z_angle += pcube->ad_angle;
 					pcube->zangle += pcube->ad_angle;
 				}

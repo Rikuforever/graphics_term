@@ -43,6 +43,7 @@ private:
 	Camera mCam;
 	DirLight mLightDir;
 	Material mMaterialMap;
+	Material mMaterialPlayer;
 
 	// objects
 	GameObject mObjPlayer;

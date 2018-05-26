@@ -34,7 +34,7 @@ public:
 	void setUniform(const GLchar* name, const glm::mat4& m);
 	void setUniform(const GLchar* name, const GLfloat f);
 	void setUniform(const GLchar* name, const GLint v);
-	
+
 	GLint getUniformLocation(const GLchar* name);
 
 private:

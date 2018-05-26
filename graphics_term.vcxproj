@@ -45,6 +45,8 @@
     <None Include="bin\shaders\basic.vert" />
     <None Include="bin\shaders\map.frag" />
     <None Include="bin\shaders\map.vert" />
+    <None Include="bin\shaders\player.frag" />
+    <None Include="bin\shaders\player.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

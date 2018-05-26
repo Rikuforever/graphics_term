@@ -16,7 +16,7 @@ Engine::~Engine()
 bool Engine::init()
 {
 	// Define the viewport dimensions
-	glClearColor(0.23f, 0.38f, 0.47f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);			// background color
 	glViewport(0, 0, gWindowWidth, gWindowHeight);
 	glEnable(GL_DEPTH_TEST);
 
@@ -24,28 +24,34 @@ bool Engine::init()
 	mLastTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
 	
 	// Load Resources
-	mShaderPlayer.loadShaders("shaders/basic.vert", "shaders/basic.frag");
+	mShaderPlayer.loadShaders("shaders/player.vert", "shaders/player.frag");
 	mShaderMap.loadShaders("shaders/map.vert", "shaders/map.frag");
 	mTexture.loadTexture("textures/wooden_crate.jpg", true);
-	
+
 
 	// Set Player Object
 	mObjPlayer.bindEngine(this);						// bind 
 	mObjPlayer.bindShader(mShaderPlayer);
-	mObjPlayer.bindTexture(mTexture);
+	mObjPlayer.bindMaterial(mMaterialPlayer);
+	mObjPlayer.bindLight(mLightDir);
 	mObjPlayer.load();									// load
 	mObjPlayer.scale = glm::vec3(0.5f, 0.5f, 0.5f);		// scale
-
+	// Set Player Material
+	mMaterialPlayer.ambient = glm::vec3(0.1f, 0.35f, 0.1f);
+	mMaterialPlayer.diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
+	mMaterialPlayer.specular = glm::vec3(0.45f, 0.55f, 0.45f);
+	mMaterialPlayer.shininess = 32.0f;
+	mMaterialPlayer.bindTexture(mTexture);
 
 	// Set Map Object
 	mObjMap.bindEngine(this);							// bind
 	mObjMap.bindShader(mShaderMap);
-	mObjMap.bindLight(mLightDir);
 	mObjMap.bindMaterial(mMaterialMap);
+	mObjMap.bindLight(mLightDir);
 	mObjMap.load();										// load
 	// Set Map Material
 	mMaterialMap.ambient = glm::vec3(0.1f, 0.35f, 0.1f);
-	mMaterialMap.diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
+	mMaterialMap.diffuse = glm::vec3(0.4f, 0.4f, 0.4f);
 	mMaterialMap.specular = glm::vec3(0.45f, 0.55f, 0.45f);
 	mMaterialMap.shininess = 32.0f;
 
@@ -128,40 +134,40 @@ void Engine::update()
 
 	if (timer >= 1.0) {
 		timer = 0;
-		if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 0.0 && mMaterialMap.diffuse.z == 0.0) {
-			mMaterialMap.diffuse.x = 1.0;
-			mMaterialMap.diffuse.y = 0.5;
-			mMaterialMap.diffuse.z = 0.0;
+		if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 0.0 && mMaterialPlayer.diffuse.z == 0.0) {
+			mMaterialPlayer.diffuse.x = 1.0;
+			mMaterialPlayer.diffuse.y = 0.5;
+			mMaterialPlayer.diffuse.z = 0.0;
 		}
-		else if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 0.5 && mMaterialMap.diffuse.z == 0.0) {
-			mMaterialMap.diffuse.x = 1.0;
-			mMaterialMap.diffuse.y = 1.0;
-			mMaterialMap.diffuse.z = 0.0;
+		else if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 0.5 && mMaterialPlayer.diffuse.z == 0.0) {
+			mMaterialPlayer.diffuse.x = 1.0;
+			mMaterialPlayer.diffuse.y = 1.0;
+			mMaterialPlayer.diffuse.z = 0.0;
 		}
-		else if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 1.0 && mMaterialMap.diffuse.z == 0.0) {
-			mMaterialMap.diffuse.x = 0.0;
-			mMaterialMap.diffuse.y = 1.0;
-			mMaterialMap.diffuse.z = 0.0;
+		else if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 1.0 && mMaterialPlayer.diffuse.z == 0.0) {
+			mMaterialPlayer.diffuse.x = 0.0;
+			mMaterialPlayer.diffuse.y = 1.0;
+			mMaterialPlayer.diffuse.z = 0.0;
 		}
-		else if (mMaterialMap.diffuse.x == 0.0 && mMaterialMap.diffuse.y == 1.0 && mMaterialMap.diffuse.z == 0.0) {
-			mMaterialMap.diffuse.x = 0.0;
-			mMaterialMap.diffuse.y = 1.0;
-			mMaterialMap.diffuse.z = 1.0;
+		else if (mMaterialPlayer.diffuse.x == 0.0 && mMaterialPlayer.diffuse.y == 1.0 && mMaterialPlayer.diffuse.z == 0.0) {
+			mMaterialPlayer.diffuse.x = 0.0;
+			mMaterialPlayer.diffuse.y = 1.0;
+			mMaterialPlayer.diffuse.z = 1.0;
 		}
-		else if (mMaterialMap.diffuse.x == 0.0 && mMaterialMap.diffuse.y == 1.0 && mMaterialMap.diffuse.z == 1.0) {
-			mMaterialMap.diffuse.x = 0.0;
-			mMaterialMap.diffuse.y = 0.0;
-			mMaterialMap.diffuse.z = 1.0;
+		else if (mMaterialPlayer.diffuse.x == 0.0 && mMaterialPlayer.diffuse.y == 1.0 && mMaterialPlayer.diffuse.z == 1.0) {
+			mMaterialPlayer.diffuse.x = 0.0;
+			mMaterialPlayer.diffuse.y = 0.0;
+			mMaterialPlayer.diffuse.z = 1.0;
 		}
-		else if (mMaterialMap.diffuse.x == 0.0 && mMaterialMap.diffuse.y == 0.0 && mMaterialMap.diffuse.z == 1.0) {
-			mMaterialMap.diffuse.x = 1.0;
-			mMaterialMap.diffuse.y = 0.0;
-			mMaterialMap.diffuse.z = 1.0;
+		else if (mMaterialPlayer.diffuse.x == 0.0 && mMaterialPlayer.diffuse.y == 0.0 && mMaterialPlayer.diffuse.z == 1.0) {
+			mMaterialPlayer.diffuse.x = 1.0;
+			mMaterialPlayer.diffuse.y = 0.0;
+			mMaterialPlayer.diffuse.z = 1.0;
 		}
-		else if (mMaterialMap.diffuse.x == 1.0 && mMaterialMap.diffuse.y == 0.0 && mMaterialMap.diffuse.z == 1.0) {
-			mMaterialMap.diffuse.x = 1.0;
-			mMaterialMap.diffuse.y = 0.0;
-			mMaterialMap.diffuse.z = 0.0;
+		else if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 0.0 && mMaterialPlayer.diffuse.z == 1.0) {
+			mMaterialPlayer.diffuse.x = 1.0;
+			mMaterialPlayer.diffuse.y = 0.0;
+			mMaterialPlayer.diffuse.z = 0.0;
 		}
 
 	}

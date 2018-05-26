@@ -290,10 +290,18 @@ void GameMap::draw()
 			mMaterialPtr->setUniform(*mShaderPtr);
 	}
 	
+	// Bind texture
+	if (mMaterialPtr != nullptr)
+		mMaterialPtr->bind();
+
 	// Draw
 	glBindVertexArray(mVAO);
 	glDrawArrays(GL_TRIANGLES, 0, mVertices.size() / 2);
 	glBindVertexArray(0);
+
+	// Unbind texture
+	if (mMaterialPtr != nullptr)
+		mMaterialPtr->unbind();
 
 	// Unbind shader
 	if (mShaderPtr != nullptr)

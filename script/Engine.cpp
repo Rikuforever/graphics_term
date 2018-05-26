@@ -260,7 +260,7 @@ bool Engine::init()
 	mMaterialMap.shininess = 32.0f;
 
 	mapdata = &mObjMap;
-	SetOffset(9, 7, 6);
+	SetOffset(9, 7, 7);
 
 	return true;
 }
@@ -302,16 +302,13 @@ void Engine::update()
 	if (keyStates['s'] || keyStates['S'])
 		mObjPlayer.position.z += (float)(deltaTime * 5.0f);
 	*/
-	//printf("%f \n %f \n %f \n  xa1 : %f \n", pcube->position.x, pcube->position.y, pcube->position.z, pcube->xangle);
+	Gravity(pcube);
 	DefineCubeLine(pcube);
 	Move(pcube);
 	if(keymode=='f')
 	DebugLog(pcube);
-	//printf("mapscan : %d\n xangle : %f\n xpos : %f\n, ypos : %f\n dx : %f\n\n", pcube->mapScan,pcube->xangle,pcube->position.x,pcube->position.y,pcube->dx);
+	
 	mObjPlayer.position = pcube->position;
-	// printf("x: %f\n y: %f\n z: %f\n\n", mObjPlayer.position.x, mObjPlayer.position.y, mObjPlayer.position.z);
-	//if (pcube->cstatus == Climbing)
-	//printf("climbing  %d\n\n",pcube->mapScan);
 	int rnum = (int)(cube.full_z_angle / 90) % 4;
 	switch (rnum) {
 	case 0:

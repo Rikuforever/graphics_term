@@ -43,6 +43,7 @@ void KeyMethod(Cube*);
 void SetCubePosition(Cube *pcube, float x, float y, float z);
 glm::vec3 GetCubeCenter(Cube* pcube);
 void SetOffset(int x, int y, int z);
+void DebugLog(Cube* pcube);
 #pragma endregion 
 
 Cube cube;
@@ -64,6 +65,7 @@ void DefineCubeLine(Cube* pcube) {
 		}
 	}
 }
+
 void CubeFall(Cube*pcube) {
 	int mapScan = pcube->mapScan;
 	if ((mapScan | 1) != mapScan) {
@@ -105,9 +107,11 @@ void CubeFall(Cube*pcube) {
 			case 's':
 				if ((pcube->mapScan | 512) == mapScan) {
 					pcube->cstatus = Falling;
+					DebugLog(pcube);
 				}
 				else if ((pcube->mapScan | 16) == mapScan) {
 					pcube->cstatus = Falling;
+					DebugLog(pcube);
 				}
 				else {
 					pcube->cstatus = Moving;
@@ -118,6 +122,7 @@ void CubeFall(Cube*pcube) {
 			}
 		}
 		else {
+			DebugLog(pcube);
 			float frame = 2.0;
 			pcube->yangle -= 90.0 / frame;
 			if ((int)(pcube->yangle) % 90 != 0) {
@@ -129,6 +134,33 @@ void CubeFall(Cube*pcube) {
 	}
 	else {
 		pcube->cstatus = Moving;
+	}
+}
+
+void Gravity(Cube* pcube) {
+	if (keymode != 'd'&&keymode != 'a'&&keymode != 'w'&&keymode != 's') {
+		int tempx = (int)(pcube->full_x_angle) % 90;
+		int tempz = (int)(pcube->full_z_angle) % 90;
+		if (tempx != 0) {
+			if (tempx <= 45) {
+				pcube->full_x_angle -= pcube->ad_angle;
+				pcube->xangle -= pcube->ad_angle;
+			}
+			else {
+				pcube->full_x_angle += pcube->ad_angle;
+				pcube->xangle += pcube->ad_angle;
+			}
+		}
+		else if (tempz != 0) {
+			if (tempz <= 45) {
+				pcube->full_z_angle -= pcube->ad_angle;
+				pcube->zangle -= pcube->ad_angle;
+			}
+			else {
+				pcube->full_z_angle += pcube->ad_angle;
+				pcube->zangle += pcube->ad_angle;
+			}
+		}
 	}
 }
 

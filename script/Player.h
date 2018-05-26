@@ -11,8 +11,7 @@ enum CubeStatus { Moving, Climbing, Falling };
 struct Cube
 {
 	GameObject* objPtr;
-	
-	float ad_angle = 1.0f;
+	float ad_angle = 3.0f;
 	float full_x_angle = 0;
 	float full_z_angle = 0;
 	float xangle=0;
@@ -25,7 +24,7 @@ struct Cube
 	glm::vec3 center;
 	int mapScan = 0;
 	CubeStatus cstatus = Moving;
-	int UseMethod = 0;;
+	int UseMethod = 0;
 };
 
 #pragma region Function List
@@ -312,52 +311,108 @@ void DebugLog(Cube* pcube) {
 
 void KeyMethod(Cube* pcube) {
 	int mapScan = pcube->mapScan;
-	switch (keymode) {
-	case 'd':
-		if ((mapScan | 2) == mapScan) {
-			pcube->cstatus = Climbing;
-			pcube->UseMethod = 2;
-		}
-		else {
-			pcube->cstatus = Moving;
-			pcube->UseMethod = 1;
-		}
-		break;
+	if ((mapScan | 2) == mapScan && (mapScan | 4)==mapScan) {
+		switch (keymode) {
+		case 'w':
+			if ((mapScan | 8) == mapScan) {
+				pcube->cstatus = Climbing;
+				pcube->UseMethod = 6;
+			}
+			else {
+				pcube->UseMethod = 4;
+				pcube->cstatus = Moving;
+			}
+			break;
 
-	case 'a':
-		if ((mapScan | 4) == mapScan) {
-			pcube->cstatus = Climbing;
-			pcube->UseMethod = 3;
+		case 's':
+			if ((mapScan | 16) == mapScan) {
+				pcube->cstatus = Climbing;
+				pcube->UseMethod = 5;
+			}
+			else {
+				pcube->UseMethod = 4;
+				pcube->cstatus = Moving;
+			}
+			break;
+		default:
+			break;
 		}
-		else {
-			pcube->UseMethod = 1;
-			pcube->cstatus = Moving;
-		}
-		break;
+	}
+	else if ((mapScan | 8) == mapScan && (mapScan | 16) == mapScan) {
+		switch (keymode) {
+		case 'd':
+			if ((mapScan | 2) == mapScan) {
+				pcube->cstatus = Climbing;
+				pcube->UseMethod = 2;
+			}
+			else {
+				pcube->cstatus = Moving;
+				pcube->UseMethod = 1;
+			}
+			break;
 
-	case 'w':
-		if ((mapScan | 8) == mapScan) {
-			pcube->cstatus = Climbing;
-			pcube->UseMethod = 6;
+		case 'a':
+			if ((mapScan | 4) == mapScan) {
+				pcube->cstatus = Climbing;
+				pcube->UseMethod = 3;
+			}
+			else {
+				pcube->UseMethod = 1;
+				pcube->cstatus = Moving;
+			}
+			break;
+		default:
+			break;
 		}
-		else {
-			pcube->UseMethod = 4;
-			pcube->cstatus = Moving;
-		}
-		break;
+	}
+	else {
+		switch (keymode) {
+		case 'd':
+			if ((mapScan | 2) == mapScan) {
+				pcube->cstatus = Climbing;
+				pcube->UseMethod = 2;
+			}
+			else {
+				pcube->cstatus = Moving;
+				pcube->UseMethod = 1;
+			}
+			break;
 
-	case 's':
-		if ((mapScan | 16) == mapScan) {
-			pcube->cstatus = Climbing;
-			pcube->UseMethod = 5;
+		case 'a':
+			if ((mapScan | 4) == mapScan) {
+				pcube->cstatus = Climbing;
+				pcube->UseMethod = 3;
+			}
+			else {
+				pcube->UseMethod = 1;
+				pcube->cstatus = Moving;
+			}
+			break;
+
+		case 'w':
+			if ((mapScan | 8) == mapScan) {
+				pcube->cstatus = Climbing;
+				pcube->UseMethod = 6;
+			}
+			else {
+				pcube->UseMethod = 4;
+				pcube->cstatus = Moving;
+			}
+			break;
+
+		case 's':
+			if ((mapScan | 16) == mapScan) {
+				pcube->cstatus = Climbing;
+				pcube->UseMethod = 5;
+			}
+			else {
+				pcube->UseMethod = 4;
+				pcube->cstatus = Moving;
+			}
+			break;
+		default:
+			break;
 		}
-		else {
-			pcube->UseMethod = 4;
-			pcube->cstatus = Moving;
-		}
-		break;
-	default:
-		break;
 	}
 }
 

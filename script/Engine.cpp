@@ -136,7 +136,9 @@ bool Engine::init()
 	mObjMap.setData( 2,  1,  9, 1);
 	mObjMap.setData( 3,  1, 11, 1);
 	mObjMap.setData( 3,  1,  9, 1);
-	mObjMap.setData( 4,  1,  9, 1);
+	mObjMap.setData( 4,  0,  9, 1);
+	mObjMap.setData( 4, 1, 8, 1);
+	mObjMap.setData( 4, 2, 8, 1);
 	mObjMap.setData( 5,  1, 11, 1);
 	mObjMap.setData( 5,  1,  9, 1);
 	mObjMap.setData( 6,  1, 11, 1);
@@ -260,7 +262,7 @@ bool Engine::init()
 	mMaterialMap.shininess = 32.0f;
 
 	mapdata = &mObjMap;
-	SetOffset(9, 7, 7);
+	SetOffset(1, 3, 10);
 
 	return true;
 }

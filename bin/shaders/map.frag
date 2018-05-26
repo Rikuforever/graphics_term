@@ -43,5 +43,5 @@ void main()
 	float NdotH = max(dot(normal, halfDir), 0.0);
 	vec3 specular = dirLight.specular * material.specular * pow(NdotH, material.shininess);
 	
-	frag_color = vec4(ambient + diffuse, 1.0f);
+	frag_color = vec4(ambient + diffuse + specular, 1.0f);
 }

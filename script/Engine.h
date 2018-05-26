@@ -39,15 +39,13 @@ public:
 private:
 	ShaderProgram mShaderPlayer;
 	ShaderProgram mShaderMap;
-	Texture2D mTexture1;
-	Texture2D mTexture2;
+	Texture2D mTexture;
 	Camera mCam;
 	DirLight mLightDir;
 	Material mMaterialMap;
 
 	// objects
 	GameObject mObjPlayer;
-	GameObject mObjFloor;
 	GameMap mObjMap;
 
 	// update

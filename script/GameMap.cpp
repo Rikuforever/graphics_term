@@ -17,6 +17,202 @@ GameMap::~GameMap()
 
 void GameMap::load()
 {
+
+	#pragma region MapData
+
+		#pragma region mainmap
+			setData(0, 0, 10, 1);
+			setData(0, 1, 10, 1);
+			setData(0, 2, 10, 1);
+			setData(0, 3, 10, 1);
+			setData(0, 3, 9, 1);
+			setData(0, 3, 11, 1);
+			setData(1, 0, 10, 1);
+			setData(2, 0, 10, 1);
+			setData(3, 0, 10, 1);
+			setData(4, 0, 10, 1);
+			setData(5, 0, 10, 1);
+			setData(6, 0, 10, 1);
+			setData(7, 1, 10, 1);
+			setData(8, 2, 10, 1);
+			setData(9, 3, 10, 1);
+			setData(9, 4, 9, 1);
+			setData(9, 5, 8, 1);
+			setData(9, 6, 7, 1);
+			setData(9, 6, 6, 1);
+			setData(9, 6, 5, 1);
+			setData(9, 6, 4, 1);
+			setData(9, 6, 3, 1);
+			setData(8, 7, 3, 1);
+			setData(7, 8, 3, 1);
+			setData(6, 9, 3, 1);
+			setData(5, 10, 3, 1);
+			setData(4, 10, 3, 1);
+			setData(3, 10, 3, 1);
+			setData(2, 10, 3, 1);
+			setData(1, 10, 3, 1);
+			setData(0, 10, 3, 1);
+			setData(0, 9, 4, 1);
+			setData(0, 8, 5, 1);
+			setData(0, 7, 6, 1);
+			setData(0, 6, 7, 1);
+			setData(0, 6, 8, 1);
+			setData(0, 6, 9, 1);
+		#pragma endregion
+		#pragma region root2
+			setData(4, 1, 11, 1);
+			setData(4, 2, 12, 1);
+			setData(4, 3, 13, 1);
+			setData(4, 4, 14, 1);
+			setData(5, 3, 14, 1);
+			setData(6, 2, 14, 1);
+			setData(7, 1, 14, 1);
+			setData(8, 1, 14, 1);
+			setData(9, 1, 14, 1);
+			setData(10, 1, 14, 1);
+			setData(11, 1, 14, 1);
+			setData(11, 1, 13, 1);
+			setData(11, 1, 12, 1);
+			setData(12, 1, 12, 1);
+			setData(12, 1, 11, 1);
+			setData(12, 1, 10, 1);
+			setData(13, 1, 10, 1);
+			setData(13, 1, 9, 1);
+			setData(13, 1, 8, 1);
+			setData(14, 1, 8, 1);
+			setData(14, 1, 7, 1);
+			setData(14, 1, 6, 1);
+			setData(14, 2, 6, 1);
+			setData(13, 3, 6, 1);
+			setData(12, 4, 6, 1);
+			setData(11, 5, 6, 1);
+			setData(10, 6, 6, 1);
+		#pragma endregion
+		#pragma region trashmap
+			setData(1, 1, 11, 1);
+			setData(1, 1, 9, 1);
+			setData(2, 1, 11, 1);
+			setData(2, 1, 9, 1);
+			setData(3, 1, 11, 1);
+			setData(3, 1, 9, 1);
+			setData(4, 0, 9, 1);
+			setData(4, 1, 8, 1);
+			setData(4, 2, 8, 1);
+			setData(5, 1, 11, 1);
+			setData(5, 1, 9, 1);
+			setData(6, 1, 11, 1);
+			setData(6, 1, 9, 1);
+			setData(7, 2, 11, 1);
+			setData(7, 2, 9, 1);
+			setData(8, 3, 11, 1);
+			setData(8, 3, 9, 1);
+			setData(9, 7, 2, 1);
+			setData(9, 8, 2, 1);
+			setData(6, 10, 2, 1);
+			setData(6, 11, 2, 1);
+			setData(7, 9, 2, 1);
+			setData(7, 10, 2, 1);
+			setData(8, 8, 2, 1);
+			setData(8, 9, 2, 1);
+			setData(5, 11, 2, 1);
+			setData(5, 12, 2, 1);
+			setData(4, 11, 2, 1);
+			setData(4, 12, 2, 1);
+			setData(3, 11, 2, 1);
+			setData(3, 12, 2, 1);
+			setData(2, 11, 2, 1);
+			setData(2, 12, 2, 1);
+			setData(1, 11, 2, 1);
+			setData(1, 12, 2, 1);
+			setData(0, 11, 2, 1);
+			setData(0, 12, 2, 1);
+			setData(6, 12, 2, 1);
+			setData(7, 11, 2, 1);
+			setData(7, 12, 2, 1);
+			setData(8, 12, 2, 1);
+			setData(8, 11, 2, 1);
+			setData(8, 10, 2, 1);
+			setData(9, 12, 2, 1);
+			setData(9, 11, 2, 1);
+			setData(9, 10, 2, 1);
+			setData(9, 9, 2, 1);
+		#pragma endregion
+
+		#pragma region secondMap
+			setData(20, 20, 20, 1);
+			setData(20, 20, 19, 1);
+			setData(20, 20, 21, 1);
+			setData(19, 20, 20, 1);
+			setData(19, 20, 19, 1);
+			setData(19, 20, 21, 1);
+			setData(21, 20, 20, 1);
+			setData(22, 20, 20, 1);
+			setData(23, 21, 20, 1);
+			setData(24, 22, 20, 1);
+			setData(24, 22, 19, 1);
+			setData(24, 22, 18, 1);
+			setData(25, 22, 18, 1);
+			setData(26, 21, 18, 1);
+			setData(27, 20, 18, 1);
+			setData(28, 17, 17, 1);
+			setData(28, 17, 18, 1);
+			setData(28, 17, 19, 1);
+			setData(27, 17, 17, 1);
+			setData(27, 17, 18, 1);
+			setData(27, 17, 19, 1);
+			setData(29, 17, 17, 1);
+			setData(29, 17, 18, 1);
+			setData(29, 17, 19, 1);
+		#pragma endregion
+
+		#pragma region firstMap
+			setData(20, 30, 30, 1);
+			setData(21, 30, 30, 1);
+			setData(22, 30, 30, 1);
+			setData(23, 30, 30, 1);
+			setData(24, 30, 30, 1);
+			setData(20, 30, 31, 1);
+			setData(21, 30, 31, 1);
+			setData(22, 30, 31, 1);
+			setData(23, 30, 31, 1);
+			setData(24, 30, 31, 1);
+			setData(20, 30, 32, 1);
+			setData(21, 30, 32, 1);
+			setData(22, 30, 32, 1);
+			setData(23, 30, 32, 1);
+			setData(24, 30, 32, 1);
+			setData(20, 30, 33, 1);
+			setData(21, 30, 33, 1);
+			setData(22, 30, 33, 1);
+			setData(23, 30, 33, 1);
+			setData(24, 30, 33, 1);
+			setData(20, 30, 34, 1);
+			setData(21, 30, 34, 1);
+			setData(22, 30, 34, 1);
+			setData(23, 30, 34, 1);
+			setData(24, 30, 34, 1);
+			setData(25, 30, 32, 1);
+			setData(26, 30, 32, 1);
+			setData(27, 30, 32, 1);
+			setData(28, 30, 32, 1);
+			setData(28, 30, 33, 1);
+			setData(28, 30, 34, 1);
+			setData(28, 30, 35, 1);
+			setData(28, 30, 36, 1);
+			setData(28, 30, 37, 1);
+			setData(27, 30, 37, 1);
+			setData(26, 30, 37, 1);
+			setData(25, 30, 37, 1);
+			setData(24, 30, 37, 1);
+			setData(23, 30, 37, 1);
+			setData(22, 30, 37, 1);
+			setData(21, 30, 37, 1);
+			setData(21, 30, 36, 1);
+
+		#pragma endregion
+
+	#pragma endregion
+	
 	std::vector<glm::vec3> posList;
 
 	// convert map data into vec3 list
@@ -69,8 +265,6 @@ void GameMap::load()
 
 void GameMap::draw()
 {
-	// Ignore texture
-
 	// Bind shader (map.vert / map.frag)
 	if (mShaderPtr != nullptr) {
 		// Compute matrix
@@ -88,7 +282,7 @@ void GameMap::draw()
 		mShaderPtr->setUniform("view", view);
 		mShaderPtr->setUniform("projection", projection);
 
-
+		// set uniforms
 		if (mLightPtr != nullptr)
 			mLightPtr->setUniform(*mShaderPtr);
 
@@ -96,6 +290,7 @@ void GameMap::draw()
 			mMaterialPtr->setUniform(*mShaderPtr);
 	}
 	
+	// Draw
 	glBindVertexArray(mVAO);
 	glDrawArrays(GL_TRIANGLES, 0, mVertices.size() / 2);
 	glBindVertexArray(0);

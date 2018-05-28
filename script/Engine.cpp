@@ -65,7 +65,8 @@ bool Engine::init()
 
 
 	// Set Directional Light
-	mLightDir.direction = glm::vec3(-1.0f, -2.0f, -3.0f);
+	beta = glm::pi<float>() / 8;
+	mLightDir.direction = glm::vec3(-1.0f * cos(beta), -2.0f, -3.0f * sin(beta));
 	mLightDir.ambient = glm::vec3(0.3f, 0.3f, 0.3f);
 	mLightDir.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	mLightDir.specular = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -160,6 +161,20 @@ void Engine::update()
 
 	#pragma endregion 
 
+	#pragma region light behavior
+
+	if (keyStates['b'] || keyStates['B']) {
+		beta = beta + (glm::pi<float>() / 180) * deltaTime * 100;
+	}
+	else if (keyStates['n'] || keyStates['N']) {
+		beta = beta - (glm::pi<float>() / 180) * deltaTime * 100;
+	}
+	else if (keyStates['m'] || keyStates['M']) {
+		beta = glm::pi<float>() / 4;
+	}
+	mLightDir.direction = glm::vec3(-1.0f * cos(beta), -2.0f, -3.0f * sin(beta));
+
+	#pragma endregion
 }
 
 void Engine::render()

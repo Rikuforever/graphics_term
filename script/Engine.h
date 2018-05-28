@@ -44,6 +44,7 @@ private:
 
 	// light
 	DirLight mLightDir;
+	float beta;
 	
 	// update
 	double mCurrentTime;

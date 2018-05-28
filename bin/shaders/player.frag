@@ -29,6 +29,13 @@ out vec4 frag_color;
 
 void main()
 {
+	// If Texture is black, return white color
+	if(vec3(texture(material.diffuseMap, TexCoord)) == vec3(0.0f,0.0f,0.0f)){
+		frag_color = vec4(1.0f,1.0f,1.0f , 1.0f);
+		return;
+	}
+		
+
 	// Ambient
 	vec3 ambient = dirLight.ambient * material.ambient * vec3(texture(material.diffuseMap, TexCoord)) * material.diffuse;
 	

@@ -1,9 +1,8 @@
 #include "Engine.h"
+#include "Util.h"
 #include "Player.h"
 
-
 #include "GL/glut.h"
-float theta  = glm::pi<float>() / 4;
 
 Engine::Engine()
 {
@@ -42,6 +41,8 @@ bool Engine::init()
 	mMaterialPlayer.specular = glm::vec3(0.45f, 0.55f, 0.45f);
 	mMaterialPlayer.shininess = 32.0f;
 	mMaterialPlayer.bindTexture(mTexture);
+	// Set Player Variable
+	mPlayerColor = 0.0f;
 
 	// Set Map Object
 	mObjMap.bindEngine(this);							// bind
@@ -57,8 +58,7 @@ bool Engine::init()
 
 
 	// Set Camera
-	//float theta = glm::pi<float>() / 4;
-
+	theta = glm::pi<float>() / 4;
 	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
 	mCam.setLookAt(mObjPlayer.position);
 
@@ -79,9 +79,13 @@ bool Engine::init()
 
 void Engine::update()
 {
-	// get delta time
+	// compute delta time
 	mCurrentTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
 	double deltaTime = mCurrentTime - mLastTime;
+
+	// update	
+
+	#pragma region player behavior
 
 	// get key
 	if (keyStates['d'] || keyStates['D']) {
@@ -103,27 +107,6 @@ void Engine::update()
 		keymode = 'l';
 	}
 
-	if (keyStates['z'] || keyStates['Z']) {
-		keymode = 'z';
-		theta = theta + (glm::pi<float>() / 180) * deltaTime * 100;
-	}
-	else if (keyStates['x'] || keyStates['X']) {
-		keymode = 'x';
-		theta = theta - (glm::pi<float>() / 180) * deltaTime * 100;
-	}
-	else if (keyStates['c'] || keyStates['C']) {
-		keymode = 'c';
-		theta = glm::pi<float>() / 4;
-	}
-	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
-	mCam.setLookAt(mObjPlayer.position);
-	
-	
-
-	// update	
-	glm::vec3 previousPosition = glm::vec3(mObjPlayer.position);
-
-	#pragma region player behavior
     StageClearCheck(pcube);
     RespawnCheck(pcube);
 	Gravity(pcube);
@@ -150,55 +133,33 @@ void Engine::update()
 	}
 
 	#pragma endregion 
-
+	
 	#pragma region cube color (diffuse) change
-	static float timer = 0;
 
-	if (timer >= 1.0) {
-		timer = 0;
-		if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 0.0 && mMaterialPlayer.diffuse.z == 0.0) {
-			mMaterialPlayer.diffuse.x = 1.0;
-			mMaterialPlayer.diffuse.y = 0.5;
-			mMaterialPlayer.diffuse.z = 0.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 0.5 && mMaterialPlayer.diffuse.z == 0.0) {
-			mMaterialPlayer.diffuse.x = 1.0;
-			mMaterialPlayer.diffuse.y = 1.0;
-			mMaterialPlayer.diffuse.z = 0.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 1.0 && mMaterialPlayer.diffuse.z == 0.0) {
-			mMaterialPlayer.diffuse.x = 0.0;
-			mMaterialPlayer.diffuse.y = 1.0;
-			mMaterialPlayer.diffuse.z = 0.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 0.0 && mMaterialPlayer.diffuse.y == 1.0 && mMaterialPlayer.diffuse.z == 0.0) {
-			mMaterialPlayer.diffuse.x = 0.0;
-			mMaterialPlayer.diffuse.y = 1.0;
-			mMaterialPlayer.diffuse.z = 1.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 0.0 && mMaterialPlayer.diffuse.y == 1.0 && mMaterialPlayer.diffuse.z == 1.0) {
-			mMaterialPlayer.diffuse.x = 0.0;
-			mMaterialPlayer.diffuse.y = 0.0;
-			mMaterialPlayer.diffuse.z = 1.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 0.0 && mMaterialPlayer.diffuse.y == 0.0 && mMaterialPlayer.diffuse.z == 1.0) {
-			mMaterialPlayer.diffuse.x = 1.0;
-			mMaterialPlayer.diffuse.y = 0.0;
-			mMaterialPlayer.diffuse.z = 1.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 0.0 && mMaterialPlayer.diffuse.z == 1.0) {
-			mMaterialPlayer.diffuse.x = 1.0;
-			mMaterialPlayer.diffuse.y = 0.0;
-			mMaterialPlayer.diffuse.z = 0.0;
-		}
+	mPlayerColor += deltaTime * 500; if (mPlayerColor >= 360) { mPlayerColor = 0; }
+	mMaterialPlayer.diffuse = hsv2rgb(hsv{ mPlayerColor, 1.0, 1.0 });
 
+	#pragma endregion
+
+	#pragma region camera behavior
+
+	// rotate
+	if (keyStates['z'] || keyStates['Z']) {
+		theta = theta + (glm::pi<float>() / 180) * deltaTime * 100;
 	}
-	else {
-		timer += deltaTime;
+	else if (keyStates['x'] || keyStates['X']) {
+		theta = theta - (glm::pi<float>() / 180) * deltaTime * 100;
 	}
-#pragma endregion
+	else if (keyStates['c'] || keyStates['C']) {
+		theta = glm::pi<float>() / 4;
+	}
 
-	mCam.move(mObjPlayer.position - previousPosition);	// camera follows player
+	// follow player
+	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
+	mCam.setLookAt(mObjPlayer.position);
+
+	#pragma endregion 
+
 }
 
 void Engine::render()

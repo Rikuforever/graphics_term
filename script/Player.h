@@ -46,7 +46,6 @@ void SetOffset(Cube* pcube, int x, int y, int z);
 void DebugLog(Cube* pcube);
 #pragma endregion 
 
-
 Cube cube;
 Cube* pcube = &cube;
 char keymode = '.';

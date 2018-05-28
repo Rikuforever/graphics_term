@@ -5,7 +5,7 @@
 #define GLEW_STATIC
 #include "GL/glew.h"
 #include "GL/wglew.h"
-#include "GL/glut.h"
+#include "GL/freeglut.h"
 #include "glm/glm.hpp"
 
 #include "Engine.h"
@@ -44,6 +44,7 @@ int main(int argc, char** argv) {
 bool initOpenGL(int argc, char** argv)
 {
 	glutInit(&argc, argv);
+	glutSetOption(GLUT_MULTISAMPLE, 10);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	glutInitWindowSize(e.gWindowWidth, e.gWindowHeight);
 

@@ -119,6 +119,9 @@ bool Engine::init()
 	mapdata = &mObjMap;
 	SetOffset(pcube,22, 31, 32);
 
+	glEnable(GL_MULTISAMPLE);
+	glHint(GL_MULTISAMPLE_FILTER_HINT_NV, GL_NICEST);
+
 	return true;
 }
 

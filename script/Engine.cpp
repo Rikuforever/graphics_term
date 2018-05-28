@@ -1,6 +1,6 @@
 ﻿#include "Engine.h"
+#include "Util.h"
 #include "Player.h"
-
 
 #include "GL/glut.h"
 
@@ -42,6 +42,8 @@ bool Engine::init()
 	mMaterialPlayer.specular = glm::vec3(0.45f, 0.55f, 0.45f);
 	mMaterialPlayer.shininess = 32.0f;
 	mMaterialPlayer.bindTexture(mTexture);
+	// Set Player Variable
+	mPlayerColor = 0.0f;
 
 	// Set Map Object
 	mObjMap.bindEngine(this);							// bind
@@ -128,53 +130,13 @@ void Engine::update()
 	}
 
 	#pragma endregion 
-
+	
 	#pragma region cube color (diffuse) change
-	static float timer = 0;
 
-	if (timer >= 1.0) {
-		timer = 0;
-		if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 0.0 && mMaterialPlayer.diffuse.z == 0.0) {
-			mMaterialPlayer.diffuse.x = 1.0;
-			mMaterialPlayer.diffuse.y = 0.5;
-			mMaterialPlayer.diffuse.z = 0.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 0.5 && mMaterialPlayer.diffuse.z == 0.0) {
-			mMaterialPlayer.diffuse.x = 1.0;
-			mMaterialPlayer.diffuse.y = 1.0;
-			mMaterialPlayer.diffuse.z = 0.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 1.0 && mMaterialPlayer.diffuse.z == 0.0) {
-			mMaterialPlayer.diffuse.x = 0.0;
-			mMaterialPlayer.diffuse.y = 1.0;
-			mMaterialPlayer.diffuse.z = 0.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 0.0 && mMaterialPlayer.diffuse.y == 1.0 && mMaterialPlayer.diffuse.z == 0.0) {
-			mMaterialPlayer.diffuse.x = 0.0;
-			mMaterialPlayer.diffuse.y = 1.0;
-			mMaterialPlayer.diffuse.z = 1.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 0.0 && mMaterialPlayer.diffuse.y == 1.0 && mMaterialPlayer.diffuse.z == 1.0) {
-			mMaterialPlayer.diffuse.x = 0.0;
-			mMaterialPlayer.diffuse.y = 0.0;
-			mMaterialPlayer.diffuse.z = 1.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 0.0 && mMaterialPlayer.diffuse.y == 0.0 && mMaterialPlayer.diffuse.z == 1.0) {
-			mMaterialPlayer.diffuse.x = 1.0;
-			mMaterialPlayer.diffuse.y = 0.0;
-			mMaterialPlayer.diffuse.z = 1.0;
-		}
-		else if (mMaterialPlayer.diffuse.x == 1.0 && mMaterialPlayer.diffuse.y == 0.0 && mMaterialPlayer.diffuse.z == 1.0) {
-			mMaterialPlayer.diffuse.x = 1.0;
-			mMaterialPlayer.diffuse.y = 0.0;
-			mMaterialPlayer.diffuse.z = 0.0;
-		}
+	mPlayerColor += deltaTime * 500; if (mPlayerColor >= 360) { mPlayerColor = 0; }
+	mMaterialPlayer.diffuse = hsv2rgb(hsv{ mPlayerColor, 1.0, 1.0 });
 
-	}
-	else {
-		timer += deltaTime;
-	}
-#pragma endregion
+	#pragma endregion
 
 	mCam.move(mObjPlayer.position - previousPosition);	// camera follows player
 }

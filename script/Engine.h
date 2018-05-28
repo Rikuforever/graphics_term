@@ -37,18 +37,11 @@ public:
 	bool gWireframe = false;
 
 private:
-	ShaderProgram mShaderPlayer;
-	ShaderProgram mShaderMap;
-	Texture2D mTexture;
+	
+	
 	Camera mCam;
 	DirLight mLightDir;
-	Material mMaterialMap;
-	Material mMaterialPlayer;
-
-	// objects
-	GameObject mObjPlayer;
-	GameMap mObjMap;
-
+	
 	// update
 	double mCurrentTime;
 	double mLastTime;
@@ -58,6 +51,17 @@ private:
 	// keyboard
 	bool keyStates[256] = {false};
 
+	// player
+	GameObject mObjPlayer;
+	ShaderProgram mShaderPlayer;
+	Material mMaterialPlayer;
+	Texture2D mTexture;
+	double mPlayerColor;
+
+	// map
+	GameMap mObjMap;
+	ShaderProgram mShaderMap;
+	Material mMaterialMap;
 };
 
 #endif

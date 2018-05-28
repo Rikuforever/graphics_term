@@ -46,7 +46,7 @@ void SetOffset(Cube* pcube, int x, int y, int z);
 void DebugLog(Cube* pcube);
 #pragma endregion 
 
-asd;
+
 Cube cube;
 Cube* pcube = &cube;
 char keymode = '.';
@@ -75,26 +75,32 @@ void StageClearCheck(Cube* pcube){
     float z=pcube->position.z;
     switch (pcube->stage) {
         case 1:
-            if(x==21&&y==31%%z==32){
+            if(x==21&&y==31&&z==36){
+				pcube->stage = 2;
                 ResetCube(pcube);
                 SetOffset(pcube,20,21,20);
             }
             break;
         case 2:
             if(x==29&&y==18&&z==17){
+				pcube->stage = 3;
                 ResetCube(pcube);
-                SetOffset(pcube,0,4,11);
+                SetOffset(pcube,1,1,10);
             }
             break;
         case 3:
-            if(x==0&&y==4&&z==11)
-                ResetCube(pcube);
-                SetOffset(pcube,40,41,40);
+			printf("%f   %f   %f\n\n", x, y, z);
+			if (x >-0.1 && x<0.1 && y > 3.9 && y<4.1 && z == 9) {
+				pcube->stage = 4;
+				ResetCube(pcube);
+				SetOffset(pcube, 40, 41, 40);
+			}
             break;
         case 4:
             if(x==44&&y==56&&z==43){
                 //end
             }
+			break;
         default:
             break;
     }
@@ -119,7 +125,7 @@ void RespawnCheck(Cube* pcube){
         case 3:
             if(y<=-5){
                 ResetCube(pcube);
-                SetOffset(pcube,0,4,11);
+                SetOffset(pcube,1,1,10);
             }
             break;
         case 4:

@@ -72,7 +72,7 @@ bool Engine::init()
 
 	// Set Starting Point
 	mapdata = &mObjMap;
-	SetOffset(pcube,40, 41, 40);
+	SetOffset(pcube,22, 31, 32);
 
 	return true;
 }

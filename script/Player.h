@@ -52,7 +52,7 @@ int mode = 1;
 GameMap* mapdata;
 
 void RespawnCheck(Cube* pcube){
-    if( pcube->position.y<=-10;){
+    if( pcube->position.y<=-10){
         pcube->position.x=0;
         pcube->position.y=0;
         pcube->position.z=0;
@@ -138,7 +138,7 @@ void CubeFall(Cube*pcube) {
 			}
 		}
 		else {
-			float frame = 2.0;
+			float frame = 100.0;
 			pcube->yangle -= 90.0 / frame;
 			if ((int)(pcube->yangle) % 90 != 0) {
 				pcube->yangle = 90.0*floor(pcube->yangle / 90);
@@ -528,7 +528,7 @@ void ScanMap(Cube* pcube) {
 	}
 }
 
-void SetOffset(int x, int y, int z) {
+void SetOffset(Cube* pcube, int x, int y, int z) {
 	pcube->xangle += 90 * x;
 	pcube->yangle += 90 * y;
 	pcube->zangle += 90 * z;

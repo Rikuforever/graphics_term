@@ -3,7 +3,7 @@
 
 
 #include "GL/glut.h"
-
+float theta  = glm::pi<float>() / 4;
 
 Engine::Engine()
 {
@@ -57,8 +57,12 @@ bool Engine::init()
 
 
 	// Set Camera
-	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f, 10.0f, 10.0f));
+	//float theta = glm::pi<float>() / 4;
+
+	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
 	mCam.setLookAt(mObjPlayer.position);
+
+
 
 	// Set Directional Light
 	mLightDir.direction = glm::vec3(-1.0f, -2.0f, -3.0f);
@@ -68,7 +72,7 @@ bool Engine::init()
 
 	// Set Starting Point
 	mapdata = &mObjMap;
-	SetOffset(pcube,1, 1, 10);
+	SetOffset(pcube,40, 41, 40);
 
 	return true;
 }
@@ -98,6 +102,23 @@ void Engine::update()
 	else {
 		keymode = 'l';
 	}
+
+	if (keyStates['z'] || keyStates['Z']) {
+		keymode = 'z';
+		theta = theta + (glm::pi<float>() / 180) * deltaTime * 100;
+	}
+	else if (keyStates['x'] || keyStates['X']) {
+		keymode = 'x';
+		theta = theta - (glm::pi<float>() / 180) * deltaTime * 100;
+	}
+	else if (keyStates['c'] || keyStates['C']) {
+		keymode = 'c';
+		theta = glm::pi<float>() / 4;
+	}
+	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
+	mCam.setLookAt(mObjPlayer.position);
+	
+	
 
 	// update	
 	glm::vec3 previousPosition = glm::vec3(mObjPlayer.position);

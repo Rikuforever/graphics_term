@@ -1,4 +1,4 @@
-﻿#include "Engine.h"
+#include "Engine.h"
 #include "Player.h"
 
 
@@ -68,7 +68,7 @@ bool Engine::init()
 
 	// Set Starting Point
 	mapdata = &mObjMap;
-	SetOffset(1, 1, 10);
+	SetOffset(pcube,1, 1, 10);
 
 	return true;
 }
@@ -103,7 +103,7 @@ void Engine::update()
 	glm::vec3 previousPosition = glm::vec3(mObjPlayer.position);
 
 	#pragma region player behavior
-
+    RespawnCheck(pcube);
 	Gravity(pcube);
 	DefineCubeLine(pcube);
 	Move(pcube);

@@ -41,7 +41,7 @@ void SetDeltaPosition(Cube*);
 void KeyMethod(Cube*);
 void SetCubePosition(Cube *pcube, float x, float y, float z);
 glm::vec3 GetCubeCenter(Cube* pcube);
-void SetOffset(int x, int y, int z);
+void SetOffset(Cube* pcube, int x, int y, int z);
 void DebugLog(Cube* pcube);
 #pragma endregion 
 
@@ -50,6 +50,25 @@ Cube* pcube = &cube;
 char keymode = '.';
 int mode = 1;
 GameMap* mapdata;
+
+void RespawnCheck(Cube* pcube){
+    if( pcube->position.y<=-10;){
+        pcube->position.x=0;
+        pcube->position.y=0;
+        pcube->position.z=0;
+        pcube->full_x_angle=0;
+        pcube->full_z_angle=0;
+        pcube->xangle=0;
+        pcube->yangle=0;
+        pcube->zangle=0;
+        pcube->mapScan=0;
+        pcube->UseMethod=0;
+        pcube->dx=0;
+        pcube->dx=0;
+        pcube->dx=0;
+        SetOffset(pcube,22,31,32);
+    }
+}
 
 void DefineCubeLine(Cube* pcube) {
 	int tempx = (int)(pcube->full_x_angle) % 90;

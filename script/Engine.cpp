@@ -27,7 +27,7 @@ bool Engine::init()
 	mShaderMap.loadShaders("shaders/map.vert", "shaders/map.frag");
 	mShaderSky.loadShaders("shaders/sky.vert", "shaders/sky.frag");
 	mTexturePlayer.loadTexture("textures/player.jpg", true);
-	mTextureSky.loadTexture("textures/wooden_crate.jpg", true);
+	mTextureSky.loadTexture("textures/sky.jpg", true);
 
 	// Set Player Object
 	mObjPlayer.bindEngine(this);						// bind 
@@ -62,16 +62,15 @@ bool Engine::init()
 	mObjSky.bindShader(mShaderSky);
 	mObjSky.bindMaterial(mMaterialSky);
 	mObjSky.load();
-	mObjSky.position = glm::vec3(30, 30, 30);
 	mObjSky.scale = glm::vec3(50, 50, 50);
 	// Set Sky Material
+	mMaterialSky.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	mMaterialSky.bindTexture(mTextureSky);
 
 	// Set Camera
 	theta = glm::pi<float>() / 4;
 	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
 	mCam.setLookAt(mObjPlayer.position);
-
 
 
 	// Set Directional Light
@@ -185,6 +184,8 @@ void Engine::update()
 	mLightDir.direction = glm::vec3(-1.0f * cos(beta), -2.0f, -3.0f * sin(beta));
 
 	#pragma endregion
+
+	mObjSky.position = mObjPlayer.position;
 }
 
 void Engine::render()

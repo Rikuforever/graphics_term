@@ -114,6 +114,15 @@ void Engine::update()
 	else if (keyStates['f'] || keyStates['F']) {
 		keymode = 'f';
 	}
+	else if (keyStates['1']) {
+		pcube->ad_angle = 1.0;
+	}
+	else if (keyStates['2']) {
+		pcube->ad_angle = 2.0;
+	}
+	else if (keyStates['3']) {
+		pcube->ad_angle = 3.0;
+	}
 	else {
 		keymode = 'l';
 	}

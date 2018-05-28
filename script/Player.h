@@ -25,6 +25,7 @@ struct Cube
 	int mapScan = 0;
 	CubeStatus cstatus = Moving;
 	int UseMethod = 0;
+    int stage=1;
 };
 
 #pragma region Function List
@@ -45,28 +46,90 @@ void SetOffset(Cube* pcube, int x, int y, int z);
 void DebugLog(Cube* pcube);
 #pragma endregion 
 
+asd;
 Cube cube;
 Cube* pcube = &cube;
 char keymode = '.';
 int mode = 1;
 GameMap* mapdata;
 
+void ResetCube(Cube* pcube){
+    pcube->position.x=0;
+    pcube->position.y=0;
+    pcube->position.z=0;
+    pcube->full_x_angle=0;
+    pcube->full_z_angle=0;
+    pcube->xangle=0;
+    pcube->yangle=0;
+    pcube->zangle=0;
+    pcube->mapScan=0;
+    pcube->UseMethod=0;
+    pcube->dx=0;
+    pcube->dx=0;
+    pcube->dx=0;
+}
+
+void StageClearCheck(Cube* pcube){
+    float x=pcube->position.x;
+    float y=pcube->position.y;
+    float z=pcube->position.z;
+    switch (pcube->stage) {
+        case 1:
+            if(x==21&&y==31%%z==32){
+                ResetCube(pcube);
+                SetOffset(pcube,20,21,20);
+            }
+            break;
+        case 2:
+            if(x==29&&y==18&&z==17){
+                ResetCube(pcube);
+                SetOffset(pcube,0,4,11);
+            }
+            break;
+        case 3:
+            if(x==0&&y==4&&z==11)
+                ResetCube(pcube);
+                SetOffset(pcube,40,41,40);
+            break;
+        case 4:
+            if(x==44&&y==56&&z==43){
+                //end
+            }
+        default:
+            break;
+    }
+}
+
 void RespawnCheck(Cube* pcube){
-    if( pcube->position.y<=-10;){
-        pcube->position.x=0;
-        pcube->position.y=0;
-        pcube->position.z=0;
-        pcube->full_x_angle=0;
-        pcube->full_z_angle=0;
-        pcube->xangle=0;
-        pcube->yangle=0;
-        pcube->zangle=0;
-        pcube->mapScan=0;
-        pcube->UseMethod=0;
-        pcube->dx=0;
-        pcube->dx=0;
-        pcube->dx=0;
-        SetOffset(pcube,22,31,32);
+    float y=pcube->position.y;
+    bool respawn=false;
+    switch (pcube->stage) {
+        case 1:
+            if(y<=25){
+                ResetCube(pcube);
+                SetOffset(pcube,22,31,32);
+            }
+            break;
+        case 2:
+            if(y<=13){
+                ResetCube(pcube);
+                SetOffset(pcube,20,21,20);
+            }
+            break;
+        case 3:
+            if(y<=-5){
+                ResetCube(pcube);
+                SetOffset(pcube,0,4,11);
+            }
+            break;
+        case 4:
+            if(y<=35){
+                ResetCube(pcube);
+                SetOffset(pcube,40,41,40);
+            }
+            break;
+        default:
+            break;
     }
 }
 

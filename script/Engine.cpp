@@ -103,6 +103,7 @@ void Engine::update()
 	glm::vec3 previousPosition = glm::vec3(mObjPlayer.position);
 
 	#pragma region player behavior
+    StageClearCheck(pcube);
     RespawnCheck(pcube);
 	Gravity(pcube);
 	DefineCubeLine(pcube);

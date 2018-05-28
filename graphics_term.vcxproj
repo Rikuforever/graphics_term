@@ -27,6 +27,7 @@
     <ClCompile Include="script\main.cpp" />
     <ClCompile Include="script\Material.cpp" />
     <ClCompile Include="script\ShaderProgram.cpp" />
+    <ClCompile Include="script\SkyBox.cpp" />
     <ClCompile Include="script\Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +39,7 @@
     <ClInclude Include="script\Material.h" />
     <ClInclude Include="script\Player.h" />
     <ClInclude Include="script\ShaderProgram.h" />
+    <ClInclude Include="script\SkyBox.h" />
     <ClInclude Include="script\Texture2D.h" />
     <ClInclude Include="script\Util.h" />
   </ItemGroup>
@@ -48,6 +50,8 @@
     <None Include="bin\shaders\map.vert" />
     <None Include="bin\shaders\player.frag" />
     <None Include="bin\shaders\player.vert" />
+    <None Include="bin\shaders\sky.frag" />
+    <None Include="bin\shaders\sky.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

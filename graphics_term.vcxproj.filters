@@ -42,6 +42,9 @@
     <ClCompile Include="script\Material.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="script\SkyBox.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="script\ShaderProgram.h">
@@ -74,6 +77,9 @@
     <ClInclude Include="script\Util.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="script\SkyBox.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\shaders\basic.frag">
@@ -92,6 +98,12 @@
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="bin\shaders\player.vert">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="bin\shaders\sky.frag">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="bin\shaders\sky.vert">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>

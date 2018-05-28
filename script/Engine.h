@@ -8,6 +8,7 @@
 #include "Material.h"
 #include "GameObject.h"
 #include "GameMap.h"
+#include "SkyBox.h"
 
 class Engine
 {
@@ -59,13 +60,19 @@ private:
 	GameObject mObjPlayer;
 	ShaderProgram mShaderPlayer;
 	Material mMaterialPlayer;
-	Texture2D mTexture;
+	Texture2D mTexturePlayer;
 	double mPlayerColor;
 
 	// map
 	GameMap mObjMap;
 	ShaderProgram mShaderMap;
 	Material mMaterialMap;
+
+	// sky
+	SkyBox mObjSky;
+	ShaderProgram mShaderSky;
+	Material mMaterialSky;
+	Texture2D mTextureSky;
 };
 
 #endif

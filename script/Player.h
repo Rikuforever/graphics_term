@@ -217,7 +217,7 @@ void CubeFall(Cube*pcube) {
 		else {
 			float frame = 100.0;
 			pcube->yangle -= 90.0 / frame;
-			pcube->position.y -= 1.0 / frame;ㄴ
+			pcube->position.y -= 1.0 / frame;
 			pcube->cstatus = Falling;
 		}
 	}

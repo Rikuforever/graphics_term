@@ -25,8 +25,9 @@ bool Engine::init()
 	// Load Resources
 	mShaderPlayer.loadShaders("shaders/player.vert", "shaders/player.frag");
 	mShaderMap.loadShaders("shaders/map.vert", "shaders/map.frag");
-	mTexture.loadTexture("textures/wooden_crate.jpg", true);
-
+	mShaderSky.loadShaders("shaders/sky.vert", "shaders/sky.frag");
+	mTexturePlayer.loadTexture("textures/player.jpg", true);
+	mTextureSky.loadTexture("textures/wooden_crate.jpg", true);
 
 	// Set Player Object
 	mObjPlayer.bindEngine(this);						// bind 
@@ -40,7 +41,7 @@ bool Engine::init()
 	mMaterialPlayer.diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
 	mMaterialPlayer.specular = glm::vec3(0.45f, 0.55f, 0.45f);
 	mMaterialPlayer.shininess = 32.0f;
-	mMaterialPlayer.bindTexture(mTexture);
+	mMaterialPlayer.bindTexture(mTexturePlayer);
 	// Set Player Variable
 	mPlayerColor = 0.0f;
 
@@ -56,6 +57,15 @@ bool Engine::init()
 	mMaterialMap.specular = glm::vec3(0.45f, 0.55f, 0.45f);
 	mMaterialMap.shininess = 32.0f;
 
+	// Set Sky Object
+	mObjSky.bindEngine(this);
+	mObjSky.bindShader(mShaderSky);
+	mObjSky.bindMaterial(mMaterialSky);
+	mObjSky.load();
+	mObjSky.position = glm::vec3(30, 30, 30);
+	mObjSky.scale = glm::vec3(50, 50, 50);
+	// Set Sky Material
+	mMaterialSky.bindTexture(mTextureSky);
 
 	// Set Camera
 	theta = glm::pi<float>() / 4;
@@ -187,6 +197,7 @@ void Engine::render()
 	// render
 	mObjPlayer.draw();
 	mObjMap.draw();
+	mObjSky.draw();
 
 	glutSwapBuffers();
 	mLastTime = mCurrentTime;

@@ -74,28 +74,28 @@ void StageClearCheck(Cube* pcube){
     float z=pcube->position.z;
     switch (pcube->stage) {
         case 1:
-            if(x==21&&y==31&&z==36){
+            if (x>20.9 && x<21.1 && y>30.9 && y<31.1 && z>35.9 && z<36.1){
 				pcube->stage = 2;
                 ResetCube(pcube);
                 SetOffset(pcube,20,21,20);
             }
             break;
         case 2:
-            if(x==29&&y==18&&z==17){
+            if(x>28.9 && x<29.1 && y>17.9 && y<18.1 && z>16.9 && z<17.1){
 				pcube->stage = 3;
                 ResetCube(pcube);
                 SetOffset(pcube,1,1,10);
             }
             break;
         case 3:
-			if (x >-0.1 && x<0.1 && y > 3.9 && y<4.1 && z == 9) {
+			if (x >-0.1 && x<0.1 && y > 3.9 && y<4.1 && z >8.9 && z<9.1) {
 				pcube->stage = 4;
 				ResetCube(pcube);
 				SetOffset(pcube, 40, 41, 40);
 			}
             break;
         case 4:
-            if(x==44&&y==56&&z==43){
+            if (x >43.9 && x<44.1 && y > 55.9 && y<56.1 && z >42.9 && z<43.1){
                 //end
             }
 			break;

@@ -27,6 +27,7 @@ bool Engine::init()
 	mShaderMap.loadShaders("shaders/map.vert", "shaders/map.frag");
 	mShaderSky.loadShaders("shaders/sky.vert", "shaders/sky.frag");
 	mTexturePlayer.loadTexture("textures/player.jpg", true);
+	mTextureFlag.loadTexture("textures/wooden_crate.jpg", true);
 	mTextureSky.loadTexture("textures/sky.jpg", true);
 
 	// Set Player Object
@@ -53,9 +54,44 @@ bool Engine::init()
 	mObjMap.load();										// load
 	// Set Map Material
 	mMaterialMap.ambient = glm::vec3(0.1f, 0.35f, 0.1f);
-	mMaterialMap.diffuse = glm::vec3(0.4f, 0.4f, 0.4f);
+	mMaterialMap.diffuse = glm::vec3(0.2f, 0.2f, 0.2f);
 	mMaterialMap.specular = glm::vec3(0.45f, 0.55f, 0.45f);
 	mMaterialMap.shininess = 32.0f;
+
+	// Set Flag Object
+	mObjFlag1.bindEngine(this);
+	mObjFlag1.bindShader(mShaderMap);
+	mObjFlag1.bindMaterial(mMaterialFlag);
+	mObjFlag1.bindLight(mLightDir);
+	mObjFlag1.load();
+	mObjFlag1.position = glm::vec3(21.0f, 31.0f, 36.0f);
+	mObjFlag1.scale = glm::vec3(0.25f, 1.0f, 0.25f);
+	mObjFlag2.bindEngine(this);
+	mObjFlag2.bindShader(mShaderMap);
+	mObjFlag2.bindMaterial(mMaterialFlag);
+	mObjFlag2.bindLight(mLightDir);
+	mObjFlag2.load();
+	mObjFlag2.position = glm::vec3(29.0f, 18.0f, 17.0f);
+	mObjFlag2.scale = glm::vec3(0.25f, 1.0f, 0.25f);
+	mObjFlag3.bindEngine(this);
+	mObjFlag3.bindShader(mShaderMap);
+	mObjFlag3.bindMaterial(mMaterialFlag);
+	mObjFlag3.bindLight(mLightDir);
+	mObjFlag3.load();
+	mObjFlag3.position = glm::vec3(0.0f, 4.0f, 9.0f);
+	mObjFlag3.scale = glm::vec3(0.25f, 1.0f, 0.25f);
+	mObjFlag4.bindEngine(this);
+	mObjFlag4.bindShader(mShaderMap);
+	mObjFlag4.bindMaterial(mMaterialFlag);
+	mObjFlag4.bindLight(mLightDir);
+	mObjFlag4.load();
+	mObjFlag4.position = glm::vec3(44.0f, 56.0f, 43.0f);
+	mObjFlag4.scale = glm::vec3(0.25f, 1.0f, 0.25f);
+	// Set Flag Material
+	mMaterialFlag.ambient = glm::vec3(0.1f, 0.35f, 0.1f);
+	mMaterialFlag.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+	mMaterialFlag.specular = glm::vec3(0.45f, 0.55f, 0.45f);
+	mMaterialFlag.shininess = 32.0f;
 
 	// Set Sky Object
 	mObjSky.bindEngine(this);
@@ -64,7 +100,6 @@ bool Engine::init()
 	mObjSky.load();
 	mObjSky.scale = glm::vec3(50, 50, 50);
 	// Set Sky Material
-	mMaterialSky.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	mMaterialSky.bindTexture(mTextureSky);
 
 	// Set Camera
@@ -198,6 +233,10 @@ void Engine::render()
 	// render
 	mObjPlayer.draw();
 	mObjMap.draw();
+	mObjFlag1.draw();
+	mObjFlag2.draw();
+	mObjFlag3.draw();
+	mObjFlag4.draw();
 	mObjSky.draw();
 
 	glutSwapBuffers();

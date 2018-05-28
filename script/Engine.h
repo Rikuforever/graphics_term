@@ -68,6 +68,14 @@ private:
 	ShaderProgram mShaderMap;
 	Material mMaterialMap;
 
+	// flag
+	GameObject mObjFlag1;
+	GameObject mObjFlag2;
+	GameObject mObjFlag3;
+	GameObject mObjFlag4;
+	Material mMaterialFlag;
+	Texture2D mTextureFlag;
+
 	// sky
 	SkyBox mObjSky;
 	ShaderProgram mShaderSky;

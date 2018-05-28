@@ -165,6 +165,9 @@ void CubeFall(Cube*pcube) {
 					pcube->cstatus = Falling;
 				}
 				else {
+                    if ((int)(pcube->yangle) % 90 != 0) {
+                        pcube->yangle = 90.0*floor(pcube->yangle / 90);
+                    }
 					pcube->cstatus = Moving;
 				}
 				break;
@@ -176,6 +179,9 @@ void CubeFall(Cube*pcube) {
 					pcube->cstatus = Falling;
 				}
 				else {
+                    if ((int)(pcube->yangle) % 90 != 0) {
+                        pcube->yangle = 90.0*floor(pcube->yangle / 90);
+                    }
 					pcube->cstatus = Moving;
 				}
 				break;
@@ -198,6 +204,9 @@ void CubeFall(Cube*pcube) {
 					pcube->cstatus = Falling;
 				}
 				else {
+                    if ((int)(pcube->yangle) % 90 != 0) {
+                        pcube->yangle = 90.0*floor(pcube->yangle / 90);
+                    }
 					pcube->cstatus = Moving;
 				}
 				break;
@@ -208,10 +217,7 @@ void CubeFall(Cube*pcube) {
 		else {
 			float frame = 100.0;
 			pcube->yangle -= 90.0 / frame;
-			if ((int)(pcube->yangle) % 90 != 0) {
-				pcube->yangle = 90.0*floor(pcube->yangle / 90);
-			}
-			pcube->position.y -= 1.0 / frame;
+			pcube->position.y -= 1.0 / frame;ㄴ
 			pcube->cstatus = Falling;
 		}
 	}

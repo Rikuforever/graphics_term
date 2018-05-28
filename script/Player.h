@@ -11,7 +11,7 @@ enum CubeStatus { Moving, Climbing, Falling };
 struct Cube
 {
 	GameObject* objPtr;
-	float ad_angle = 1.0f;
+	float ad_angle = 3.0f;
 	float full_x_angle = 0;
 	float full_z_angle = 0;
 	float xangle=0;
@@ -88,7 +88,6 @@ void StageClearCheck(Cube* pcube){
             }
             break;
         case 3:
-			printf("%f   %f   %f\n\n", x, y, z);
 			if (x >-0.1 && x<0.1 && y > 3.9 && y<4.1 && z == 9) {
 				pcube->stage = 4;
 				ResetCube(pcube);
@@ -147,6 +146,9 @@ void DefineCubeLine(Cube* pcube) {
 		ScanMap(pcube);
 		CubeFall(pcube);
 		if (pcube->cstatus != Falling) {
+			if ((int)(pcube->yangle) % 90 != 0) {
+				pcube->yangle = 90.0*floor(pcube->yangle / 90);
+			}
 			KeyMethod(pcube);
 		}
 	}
@@ -165,9 +167,6 @@ void CubeFall(Cube*pcube) {
 					pcube->cstatus = Falling;
 				}
 				else {
-                    if ((int)(pcube->yangle) % 90 != 0) {
-                        pcube->yangle = 90.0*floor(pcube->yangle / 90);
-                    }
 					pcube->cstatus = Moving;
 				}
 				break;
@@ -179,9 +178,6 @@ void CubeFall(Cube*pcube) {
 					pcube->cstatus = Falling;
 				}
 				else {
-                    if ((int)(pcube->yangle) % 90 != 0) {
-                        pcube->yangle = 90.0*floor(pcube->yangle / 90);
-                    }
 					pcube->cstatus = Moving;
 				}
 				break;
@@ -204,9 +200,6 @@ void CubeFall(Cube*pcube) {
 					pcube->cstatus = Falling;
 				}
 				else {
-                    if ((int)(pcube->yangle) % 90 != 0) {
-                        pcube->yangle = 90.0*floor(pcube->yangle / 90);
-                    }
 					pcube->cstatus = Moving;
 				}
 				break;
@@ -215,7 +208,7 @@ void CubeFall(Cube*pcube) {
 			}
 		}
 		else {
-			float frame = 100.0;
+			float frame = 10.0;
 			pcube->yangle -= 90.0 / frame;
 			pcube->position.y -= 1.0 / frame;
 			pcube->cstatus = Falling;

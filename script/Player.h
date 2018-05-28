@@ -46,7 +46,6 @@ void SetOffset(Cube* pcube, int x, int y, int z);
 void DebugLog(Cube* pcube);
 #pragma endregion 
 
-asd;
 Cube cube;
 Cube* pcube = &cube;
 char keymode = '.';
@@ -75,7 +74,7 @@ void StageClearCheck(Cube* pcube){
     float z=pcube->position.z;
     switch (pcube->stage) {
         case 1:
-            if(x==21&&y==31%%z==32){
+            if(x==21&&y==31&&z==32){
                 ResetCube(pcube);
                 SetOffset(pcube,20,21,20);
             }

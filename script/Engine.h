@@ -38,8 +38,11 @@ public:
 
 private:
 	
-	
+	// camera
 	Camera mCam;
+	float theta;
+
+	// light
 	DirLight mLightDir;
 	
 	// update

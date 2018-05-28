@@ -3,7 +3,6 @@
 #include "Player.h"
 
 #include "GL/glut.h"
-float theta  = glm::pi<float>() / 4;
 
 Engine::Engine()
 {
@@ -59,8 +58,7 @@ bool Engine::init()
 
 
 	// Set Camera
-	//float theta = glm::pi<float>() / 4;
-
+	theta = glm::pi<float>() / 4;
 	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
 	mCam.setLookAt(mObjPlayer.position);
 
@@ -81,9 +79,13 @@ bool Engine::init()
 
 void Engine::update()
 {
-	// get delta time
+	// compute delta time
 	mCurrentTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
 	double deltaTime = mCurrentTime - mLastTime;
+
+	// update	
+
+	#pragma region player behavior
 
 	// get key
 	if (keyStates['d'] || keyStates['D']) {
@@ -105,27 +107,6 @@ void Engine::update()
 		keymode = 'l';
 	}
 
-	if (keyStates['z'] || keyStates['Z']) {
-		keymode = 'z';
-		theta = theta + (glm::pi<float>() / 180) * deltaTime * 100;
-	}
-	else if (keyStates['x'] || keyStates['X']) {
-		keymode = 'x';
-		theta = theta - (glm::pi<float>() / 180) * deltaTime * 100;
-	}
-	else if (keyStates['c'] || keyStates['C']) {
-		keymode = 'c';
-		theta = glm::pi<float>() / 4;
-	}
-	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
-	mCam.setLookAt(mObjPlayer.position);
-	
-	
-
-	// update	
-	glm::vec3 previousPosition = glm::vec3(mObjPlayer.position);
-
-	#pragma region player behavior
     StageClearCheck(pcube);
     RespawnCheck(pcube);
 	Gravity(pcube);
@@ -160,7 +141,25 @@ void Engine::update()
 
 	#pragma endregion
 
-	mCam.move(mObjPlayer.position - previousPosition);	// camera follows player
+	#pragma region camera behavior
+
+	// rotate
+	if (keyStates['z'] || keyStates['Z']) {
+		theta = theta + (glm::pi<float>() / 180) * deltaTime * 100;
+	}
+	else if (keyStates['x'] || keyStates['X']) {
+		theta = theta - (glm::pi<float>() / 180) * deltaTime * 100;
+	}
+	else if (keyStates['c'] || keyStates['C']) {
+		theta = glm::pi<float>() / 4;
+	}
+
+	// follow player
+	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
+	mCam.setLookAt(mObjPlayer.position);
+
+	#pragma endregion 
+
 }
 
 void Engine::render()

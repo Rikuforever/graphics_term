@@ -45,6 +45,9 @@
     <ClCompile Include="script\SkyBox.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="script\GameObject_OBJ.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="script\ShaderProgram.h">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="script\SkyBox.h">
       <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="script\GameObject_OBJ.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

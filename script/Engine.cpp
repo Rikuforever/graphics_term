@@ -21,14 +21,18 @@ bool Engine::init()
 
 	// Initialize variables
 	mLastTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
+	mDoAlias = true;
 	
 	// Load Resources
 	mShaderPlayer.loadShaders("shaders/player.vert", "shaders/player.frag");
 	mShaderMap.loadShaders("shaders/map.vert", "shaders/map.frag");
 	mShaderSky.loadShaders("shaders/sky.vert", "shaders/sky.frag");
+	mShaderDeco.loadShaders("shaders/basic.vert", "shaders/basic.frag");
 	mTexturePlayer.loadTexture("textures/player.jpg", true);
 	mTextureFlag.loadTexture("textures/wooden_crate.jpg", true);
 	mTextureSky.loadTexture("textures/sky.jpg", true);
+	mTextureDeco1.loadTexture("textures/bunny_diffuse.jpg", true);
+	
 
 	// Set Player Object
 	mObjPlayer.bindEngine(this);						// bind 
@@ -102,6 +106,16 @@ bool Engine::init()
 	// Set Sky Material
 	mMaterialSky.bindTexture(mTextureSky);
 
+	// Set Deco
+	mObjDeco1.bindEngine(this);
+	mObjDeco1.bindShader(mShaderDeco);
+	mObjDeco1.bindMaterial(mMaterialDeco1);
+	mObjDeco1.bindLight(mLightDir);
+	mObjDeco1.loadOBJ("models/bunny.obj");
+	mObjDeco1.position = glm::vec3(21, 31, 32);
+	// Set Deco Materil
+	mMaterialDeco1.bindTexture(mTextureDeco1);
+
 	// Set Camera
 	theta = glm::pi<float>() / 4;
 	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
@@ -118,9 +132,6 @@ bool Engine::init()
 	// Set Starting Point
 	mapdata = &mObjMap;
 	SetOffset(pcube,22, 31, 32);
-
-	glEnable(GL_MULTISAMPLE);
-	glHint(GL_MULTISAMPLE_FILTER_HINT_NV, GL_NICEST);
 
 	return true;
 }
@@ -268,6 +279,20 @@ void Engine::render()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	if (keyStates['4']) {
+		mDoAlias = !mDoAlias;
+	}
+
+	if(mDoAlias)
+	{
+		glEnable(GL_MULTISAMPLE);
+		glHint(GL_MULTISAMPLE_FILTER_HINT_NV, GL_NICEST);
+	} 
+	else
+	{
+		glDisable(GL_MULTISAMPLE);
+	}
+
 	// render
 	mObjPlayer.draw();
 	mObjMap.draw();
@@ -276,6 +301,7 @@ void Engine::render()
 	mObjFlag3.draw();
 	mObjFlag4.draw();
 	mObjSky.draw();
+	mObjDeco1.draw();
 
 	glutSwapBuffers();
 	mLastTime = mCurrentTime;

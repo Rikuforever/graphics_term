@@ -12,6 +12,8 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
+	glDeleteVertexArrays(1, &mVAO);
+	glDeleteBuffers(1, &mVBO);
 }
 
 void GameObject::load()
@@ -71,9 +73,8 @@ void GameObject::load()
 #pragma endregion 
 
 	// Create & Bind buffer
-	GLuint vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glGenBuffers(1, &mVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, mVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	glGenVertexArrays(1, &mVAO);
 	glBindVertexArray(mVAO);

@@ -21,6 +21,7 @@ bool Engine::init()
 
 	// Initialize variables
 	mLastTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
+	mDoAlias = true;
 	
 	// Load Resources
 	mShaderPlayer.loadShaders("shaders/player.vert", "shaders/player.frag");
@@ -30,7 +31,7 @@ bool Engine::init()
 	mTexturePlayer.loadTexture("textures/player.jpg", true);
 	mTextureFlag.loadTexture("textures/wooden_crate.jpg", true);
 	mTextureSky.loadTexture("textures/sky.jpg", true);
-	mTextureDeco1.loadTexture("textures/barrel_diffuse.png", true);
+	mTextureDeco1.loadTexture("textures/bunny_diffuse.jpg", true);
 	
 
 	// Set Player Object
@@ -110,7 +111,7 @@ bool Engine::init()
 	mObjDeco1.bindShader(mShaderDeco);
 	mObjDeco1.bindMaterial(mMaterialDeco1);
 	mObjDeco1.bindLight(mLightDir);
-	mObjDeco1.loadOBJ("models/barrel.obj");
+	mObjDeco1.loadOBJ("models/bunny.obj");
 	mObjDeco1.position = glm::vec3(21, 31, 32);
 	// Set Deco Materil
 	mMaterialDeco1.bindTexture(mTextureDeco1);
@@ -131,9 +132,6 @@ bool Engine::init()
 	// Set Starting Point
 	mapdata = &mObjMap;
 	SetOffset(pcube,22, 31, 32);
-
-	glEnable(GL_MULTISAMPLE);
-	glHint(GL_MULTISAMPLE_FILTER_HINT_NV, GL_NICEST);
 
 	return true;
 }
@@ -254,6 +252,20 @@ void Engine::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	if (keyStates['4']) {
+		mDoAlias = !mDoAlias;
+	}
+
+	if(mDoAlias)
+	{
+		glEnable(GL_MULTISAMPLE);
+		glHint(GL_MULTISAMPLE_FILTER_HINT_NV, GL_NICEST);
+	} 
+	else
+	{
+		glDisable(GL_MULTISAMPLE);
+	}
 
 	// render
 	mObjPlayer.draw();

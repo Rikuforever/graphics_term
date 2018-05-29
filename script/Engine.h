@@ -53,6 +53,7 @@ private:
 	double mLastTime;
 
 	// render
+	bool mDoAlias;
 
 	// keyboard
 	bool keyStates[256] = {false};

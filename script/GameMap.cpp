@@ -286,6 +286,140 @@ void GameMap::load()
 
 	#pragma endregion
 
+#pragma region EDGE
+	#pragma region E
+			setData(80, 75, 42, 1);
+			setData(80, 75, 43, 1);
+			setData(80, 75, 44, 1);
+			setData(80, 75, 45, 1);
+			setData(80, 75, 46, 1);
+			setData(80, 75, 47, 1);
+			setData(80, 75, 48, 1);
+
+			setData(80, 74, 42, 1);
+			setData(80, 73, 42, 1);
+			setData(80, 72, 42, 1);
+			setData(80, 71, 42, 1);
+			setData(80, 70, 42, 1);
+			setData(80, 69, 42, 1);
+			setData(80, 68, 42, 1);
+			setData(80, 67, 42, 1);
+
+			setData(80, 71, 43, 1);
+			setData(80, 71, 44, 1);
+			setData(80, 71, 45, 1);
+			setData(80, 71, 46, 1);
+			setData(80, 71, 47, 1);
+			setData(80, 71, 48, 1);
+
+			setData(80, 67, 43, 1);
+			setData(80, 67, 44, 1);
+			setData(80, 67, 45, 1);
+			setData(80, 67, 46, 1);
+			setData(80, 67, 47, 1);
+			setData(80, 67, 48, 1);
+#pragma endregion 
+
+	#pragma region D
+
+			setData(80, 75, 52, 1);
+			setData(80, 74, 52, 1);
+			setData(80, 73, 52, 1);
+			setData(80, 72, 52, 1);
+			setData(80, 71, 52, 1);
+			setData(80, 70, 52, 1);
+			setData(80, 69, 52, 1);
+			setData(80, 68, 52, 1);
+			setData(80, 67, 52, 1);
+
+			setData(80, 75, 53, 1);
+			setData(80, 75, 54, 1);
+			setData(80, 67, 53, 1);
+			setData(80, 67, 54, 1);
+
+			setData(80, 75, 55, 1);
+			setData(80, 74, 56, 1);
+			setData(80, 67, 55, 1);
+			setData(80, 68, 56, 1);
+
+			setData(80, 74, 57, 1);
+			setData(80, 68, 57, 1);
+
+			setData(80, 73, 58, 1);
+			setData(80, 69, 58, 1);
+
+			setData(80, 72, 59, 1);
+			setData(80, 71, 59, 1);
+			setData(80, 70, 59, 1);
+	#pragma endregion 
+
+	#pragma region E
+
+			setData(80, 65, 52, 1);
+			setData(80, 65, 53, 1);
+			setData(80, 65, 54, 1);
+			setData(80, 65, 55, 1);
+			setData(80, 65, 56, 1);
+			setData(80, 65, 57, 1);
+			setData(80, 65, 58, 1);
+
+			setData(80, 64, 52, 1);
+			setData(80, 63, 52, 1);
+			setData(80, 62, 52, 1);
+			setData(80, 61, 52, 1);
+			setData(80, 60, 52, 1);
+			setData(80, 59, 52, 1);
+			setData(80, 58, 52, 1);
+			setData(80, 57, 52, 1);
+
+			setData(80, 61, 53, 1);
+			setData(80, 61, 54, 1);
+			setData(80, 61, 55, 1);
+			setData(80, 61, 56, 1);
+			setData(80, 61, 57, 1);
+			setData(80, 61, 58, 1);
+
+			setData(80, 57, 53, 1);
+			setData(80, 57, 54, 1);
+			setData(80, 57, 55, 1);
+			setData(80, 57, 56, 1);
+			setData(80, 57, 57, 1);
+			setData(80, 57, 58, 1);
+
+	#pragma endregion 
+
+	#pragma region G
+			setData(80, 62, 42, 1);
+			setData(80, 61, 42, 1);
+			setData(80, 60, 42, 1);
+
+			setData(80, 63, 43, 1);
+			setData(80, 59, 43, 1);
+
+			setData(80, 64, 43, 1);
+			setData(80, 58, 43, 1);
+
+			setData(80, 65, 44, 1);
+			setData(80, 57, 44, 1);
+			setData(80, 65, 45, 1);
+			setData(80, 57, 45, 1);
+
+			setData(80, 65, 46, 1);
+			setData(80, 64, 47, 1);
+			setData(80, 64, 48, 1);
+			setData(80, 57, 46, 1);
+			setData(80, 58, 47, 1);
+
+			setData(80, 60, 48, 1);
+			setData(80, 60, 47, 1);
+			setData(80, 60, 46, 1);
+			setData(80, 59, 48, 1);
+			setData(80, 58, 48, 1);
+			setData(80, 57, 48, 1);
+
+	#pragma endregion
+
+#pragma endregion
 
 	#pragma endregion
 	

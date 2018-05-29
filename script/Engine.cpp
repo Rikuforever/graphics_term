@@ -130,67 +130,73 @@ void Engine::update()
 	// compute delta time
 	mCurrentTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
 	double deltaTime = mCurrentTime - mLastTime;
+	static bool isGameEnd = false;
 
 	// update	
 
-	#pragma region player behavior
+	if (isGameEnd == false) {
+#pragma region player behavior
 
-	// get key
-	if (keyStates['d'] || keyStates['D']) {
-		keymode = 'd';
-	}
-	else if (keyStates['w'] || keyStates['W']) {
-		keymode = 'w';
-	}
-	else if (keyStates['a'] || keyStates['A']) {
-		keymode = 'a';
-	}
-	else if (keyStates['s'] || keyStates['S']) {
-		keymode = 's';
-	}
-	else if (keyStates['f'] || keyStates['F']) {
-		keymode = 'f';
-	}
-	else if (keyStates['1']) {
-		pcube->ad_angle = 1.0;
-	}
-	else if (keyStates['2']) {
-		pcube->ad_angle = 2.0;
-	}
-	else if (keyStates['3']) {
-		pcube->ad_angle = 3.0;
-	}
-	else {
-		keymode = 'l';
+		// get key
+		if (keyStates['d'] || keyStates['D']) {
+			keymode = 'd';
+		}
+		else if (keyStates['w'] || keyStates['W']) {
+			keymode = 'w';
+		}
+		else if (keyStates['a'] || keyStates['A']) {
+			keymode = 'a';
+		}
+		else if (keyStates['s'] || keyStates['S']) {
+			keymode = 's';
+		}
+		else if (keyStates['f'] || keyStates['F']) {
+			keymode = 'f';
+		}
+		else if (keyStates['1']) {
+			pcube->ad_angle = 1.0;
+		}
+		else if (keyStates['2']) {
+			pcube->ad_angle = 2.0;
+		}
+		else if (keyStates['3']) {
+			pcube->ad_angle = 3.0;
+		}
+		else {
+			keymode = 'l';
+		}
+
+
+		StageClearCheck(pcube, isGameEnd);
+		RespawnCheck(pcube);
+		Gravity(pcube);
+		DefineCubeLine(pcube);
+		Move(pcube);
+		if (keymode == 'f')
+			DebugLog(pcube);
+
+		mObjPlayer.position = pcube->position;
+		int rnum = (int)(cube.full_z_angle / 90) % 4;
+		switch (rnum) {
+		case 0:
+			mObjPlayer.rotation = glm::vec3(cube.full_z_angle, 0.0f, -cube.full_x_angle);
+			break;
+		case 1:
+			mObjPlayer.rotation = glm::vec3(cube.full_z_angle, -cube.full_x_angle, 0.0f);
+			break;
+		case 2:
+			mObjPlayer.rotation = glm::vec3(cube.full_z_angle, 0.0f, cube.full_x_angle);
+			break;
+		case 3:
+			mObjPlayer.rotation = glm::vec3(cube.full_z_angle, cube.full_x_angle, 0.0f);
+			break;
+		}
+
+#pragma endregion 
 	}
 
-    StageClearCheck(pcube);
-    RespawnCheck(pcube);
-	Gravity(pcube);
-	DefineCubeLine(pcube);
-	Move(pcube);
-	if(keymode=='f')
-	DebugLog(pcube);
-	
-	mObjPlayer.position = pcube->position;
-	int rnum = (int)(cube.full_z_angle / 90) % 4;
-	switch (rnum) {
-	case 0:
-		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, 0.0f, -cube.full_x_angle);
-		break;
-	case 1:
-		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, -cube.full_x_angle, 0.0f);
-		break;
-	case 2:
-		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, 0.0f, cube.full_x_angle);
-		break;
-	case 3:
-		mObjPlayer.rotation = glm::vec3(cube.full_z_angle, cube.full_x_angle, 0.0f);
-		break;
-	}
 
-	#pragma endregion 
-	
+
 	#pragma region cube color (diffuse) change
 
 	mPlayerColor += deltaTime * 500; if (mPlayerColor >= 360) { mPlayerColor = 0; }
@@ -200,36 +206,56 @@ void Engine::update()
 
 	#pragma region camera behavior
 
-	// rotate
-	if (keyStates['z'] || keyStates['Z']) {
-		theta = theta + (glm::pi<float>() / 180) * deltaTime * 100;
-	}
-	else if (keyStates['x'] || keyStates['X']) {
-		theta = theta - (glm::pi<float>() / 180) * deltaTime * 100;
-	}
-	else if (keyStates['c'] || keyStates['C']) {
-		theta = glm::pi<float>() / 4;
-	}
+	if (isGameEnd == false) {
+		// rotate
+		if (keyStates['z'] || keyStates['Z']) {
+			theta = theta + (glm::pi<float>() / 180) * deltaTime * 100;
+		}
+		else if (keyStates['x'] || keyStates['X']) {
+			theta = theta - (glm::pi<float>() / 180) * deltaTime * 100;
+		}
+		else if (keyStates['c'] || keyStates['C']) {
+			theta = glm::pi<float>() / 4;
+		}
 
-	// follow player
-	mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
-	mCam.setLookAt(mObjPlayer.position);
+		// follow player
+		mCam.setPosition(mObjPlayer.position + glm::vec3(10.0f * cos(theta), 10.0f, 10.0f * sin(theta)));
+		mCam.setLookAt(mObjPlayer.position);
+	}
+	else if (isGameEnd == true) {
+		static float alpha = 0;
+		if (alpha <= glm::pi<float>()) {
+			alpha = alpha + (glm::pi<float>() / 180) * deltaTime * 100;
+		}
+		else {
+			alpha = glm::pi<float>();
+		}
+		mCam.setLookAt(mObjPlayer.position + glm::vec3(10.0f * sin(alpha/2), 10.0f * sin(alpha/2), 10.0f * sin(theta) * sin(alpha / 2) ));
+
+	}
 
 	#pragma endregion 
 
 	#pragma region light behavior
-
-	if (keyStates['b'] || keyStates['B']) {
-		beta = beta + (glm::pi<float>() / 180) * deltaTime * 100;
+	static float gammax = 0;
+	static float gammaz = 0;
+	if(isGameEnd == false) {
+		if (keyStates['b'] || keyStates['B']) {
+			beta = beta + (glm::pi<float>() / 180) * deltaTime * 100;
+		}
+		else if (keyStates['n'] || keyStates['N']) {
+			beta = beta - (glm::pi<float>() / 180) * deltaTime * 100;
+		}
+		else if (keyStates['m'] || keyStates['M']) {
+			beta = glm::pi<float>() / 4;
+		}
+		mLightDir.direction = glm::vec3(-1.0f * cos(beta), -2.0f, -3.0f * sin(beta));
 	}
-	else if (keyStates['n'] || keyStates['N']) {
-		beta = beta - (glm::pi<float>() / 180) * deltaTime * 100;
+	else if (isGameEnd == true) {
+		gammax = 86.4;
+		gammaz = 26.6;
+		mLightDir.direction = glm::vec3(-1.0f * cos(beta) * sin(gammax), -2.0f, -3.0f * sin(beta) * sin(gammaz));
 	}
-	else if (keyStates['m'] || keyStates['M']) {
-		beta = glm::pi<float>() / 4;
-	}
-	mLightDir.direction = glm::vec3(-1.0f * cos(beta), -2.0f, -3.0f * sin(beta));
-
 	#pragma endregion
 
 	mObjSky.position = mObjPlayer.position;

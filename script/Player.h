@@ -68,7 +68,7 @@ void ResetCube(Cube* pcube){
     pcube->dx=0;
 }
 
-void StageClearCheck(Cube* pcube){
+void StageClearCheck(Cube* pcube, bool &asd){
     float x=pcube->position.x;
     float y=pcube->position.y;
     float z=pcube->position.z;
@@ -97,6 +97,7 @@ void StageClearCheck(Cube* pcube){
         case 4:
             if (x >43.9 && x<44.1 && y > 55.9 && y<56.1 && z >42.9 && z<43.1){
                 //end
+				asd = true;
             }
 			break;
         default:

@@ -211,7 +211,7 @@ void GameMap::load()
 
 		#pragma endregion
 
-#pragma region fourthMap
+		#pragma region fourthMap
 			setData(40, 40, 40, 1);
 			setData(40, 40, 39, 1);
 			setData(40, 41, 38, 1);
@@ -284,7 +284,8 @@ void GameMap::load()
 			setData(43, 50, 31, 1);
 			setData(43, 50, 30, 1);
 
-#pragma endregion
+	#pragma endregion
+
 
 	#pragma endregion
 	

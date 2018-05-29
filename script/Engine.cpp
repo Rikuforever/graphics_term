@@ -31,7 +31,8 @@ bool Engine::init()
 	mTexturePlayer.loadTexture("textures/player.jpg", true);
 	mTextureFlag.loadTexture("textures/wooden_crate.jpg", true);
 	mTextureSky.loadTexture("textures/sky.jpg", true);
-	mTextureDeco1.loadTexture("textures/bunny_diffuse.jpg", true);
+	mTextureDeco.loadTexture("textures/bunny_diffuse.jpg", true);
+	mTextureProfessor.loadTexture("textures/professor.jpg", true);
 	
 
 	// Set Player Object
@@ -107,14 +108,46 @@ bool Engine::init()
 	mMaterialSky.bindTexture(mTextureSky);
 
 	// Set Deco
-	mObjDeco1.bindEngine(this);
+	mObjDeco1.bindEngine(this);						// bunny position
 	mObjDeco1.bindShader(mShaderDeco);
 	mObjDeco1.bindMaterial(mMaterialDeco1);
 	mObjDeco1.bindLight(mLightDir);
 	mObjDeco1.loadOBJ("models/bunny.obj");
-	mObjDeco1.position = glm::vec3(21, 31, 32);
-	// Set Deco Materil
-	mMaterialDeco1.bindTexture(mTextureDeco1);
+	mObjDeco1.position = glm::vec3(19, 33, 30);
+	mObjDeco2.bindEngine(this);						// teapot position
+	mObjDeco2.bindShader(mShaderDeco);
+	mObjDeco2.bindMaterial(mMaterialDeco2);
+	mObjDeco2.bindLight(mLightDir);
+	mObjDeco2.loadOBJ("models/teapot.obj");
+	mObjDeco2.position = glm::vec3(24, 20, 14);
+	mObjDeco3.bindEngine(this);						// monkey position
+	mObjDeco3.bindShader(mShaderDeco);
+	mObjDeco3.bindMaterial(mMaterialDeco3);
+	mObjDeco3.bindLight(mLightDir);
+	mObjDeco3.loadOBJ("models/monkey.obj");
+	mObjDeco3.position = glm::vec3(2, 3, 2);
+	mObjDeco3.scale = glm::vec3(2, 2, 2);
+	mObjDeco4.bindEngine(this);						// professor position
+	mObjDeco4.bindShader(mShaderDeco);
+	mObjDeco4.bindMaterial(mMaterialDeco4);
+	mObjDeco4.bindLight(mLightDir);
+	mObjDeco4.load();
+	mObjDeco4.position = glm::vec3(44, 58, 36);
+	mObjDeco4.scale = glm::vec3(1.0, 1.2, 0.01);
+	mObjDeco5.bindEngine(this);						// star position
+	mObjDeco5.bindShader(mShaderDeco);
+	mObjDeco5.bindMaterial(mMaterialDeco5);
+	mObjDeco5.bindLight(mLightDir);
+	mObjDeco5.loadOBJ("models/star.obj");
+	mObjDeco5.scale = glm::vec3(100, 100, 100);
+	mObjDeco5.position = glm::vec3(80, 66, 50);
+	mObjDeco5.rotation = glm::vec3(90, 0, 0);
+	// Set Deco Material
+	mMaterialDeco1.bindTexture(mTextureDeco);
+	mMaterialDeco2.bindTexture(mTextureDeco);
+	mMaterialDeco3.bindTexture(mTextureDeco);
+	mMaterialDeco4.bindTexture(mTextureProfessor);
+	mMaterialDeco5.bindTexture(mTextureDeco);
 
 	// Set Camera
 	theta = glm::pi<float>() / 4;
@@ -243,6 +276,10 @@ void Engine::update()
 
 	#pragma endregion
 
+	mObjDeco1.rotation += glm::vec3(5.0f * deltaTime, 10.0f * deltaTime, 15.0f * deltaTime);
+	mObjDeco2.rotation += glm::vec3(-5.0f * deltaTime, 10.0f * deltaTime, -15.0f * deltaTime);
+	mObjDeco3.rotation += glm::vec3(5.0f * deltaTime, -10.0f * deltaTime, -15.0f * deltaTime);
+
 	mObjSky.position = mObjPlayer.position;
 }
 
@@ -276,6 +313,10 @@ void Engine::render()
 	mObjFlag4.draw();
 	mObjSky.draw();
 	mObjDeco1.draw();
+	mObjDeco2.draw();
+	mObjDeco3.draw();
+	mObjDeco4.draw();
+	mObjDeco5.draw();
 
 	glutSwapBuffers();
 	mLastTime = mCurrentTime;

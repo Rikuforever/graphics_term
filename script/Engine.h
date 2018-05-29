@@ -86,9 +86,18 @@ private:
 
 	// deco
 	ShaderProgram mShaderDeco;
+	Texture2D mTextureDeco;
 	GameObject_OBJ mObjDeco1;
 	Material mMaterialDeco1;
-	Texture2D mTextureDeco1;
+	GameObject_OBJ mObjDeco2;
+	Material mMaterialDeco2;
+	GameObject_OBJ mObjDeco3;
+	Material mMaterialDeco3;
+	GameObject mObjDeco4;
+	Material mMaterialDeco4;
+	GameObject_OBJ mObjDeco5;
+	Material mMaterialDeco5;
+	Texture2D mTextureProfessor;
 };
 
 #endif

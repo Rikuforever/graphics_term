@@ -95,8 +95,6 @@ private:
 	Material mMaterialDeco3;
 	GameObject mObjDeco4;
 	Material mMaterialDeco4;
-	GameObject_OBJ mObjDeco5;
-	Material mMaterialDeco5;
 	Texture2D mTextureProfessor;
 };
 

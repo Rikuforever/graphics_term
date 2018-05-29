@@ -134,20 +134,11 @@ bool Engine::init()
 	mObjDeco4.load();
 	mObjDeco4.position = glm::vec3(44, 58, 36);
 	mObjDeco4.scale = glm::vec3(1.0, 1.2, 0.01);
-	mObjDeco5.bindEngine(this);						// star position
-	mObjDeco5.bindShader(mShaderDeco);
-	mObjDeco5.bindMaterial(mMaterialDeco5);
-	mObjDeco5.bindLight(mLightDir);
-	mObjDeco5.loadOBJ("models/star.obj");
-	mObjDeco5.scale = glm::vec3(100, 100, 100);
-	mObjDeco5.position = glm::vec3(80, 66, 50);
-	mObjDeco5.rotation = glm::vec3(90, 0, 0);
 	// Set Deco Material
 	mMaterialDeco1.bindTexture(mTextureDeco);
 	mMaterialDeco2.bindTexture(mTextureDeco);
 	mMaterialDeco3.bindTexture(mTextureDeco);
 	mMaterialDeco4.bindTexture(mTextureProfessor);
-	mMaterialDeco5.bindTexture(mTextureDeco);
 
 	// Set Camera
 	theta = glm::pi<float>() / 4;
@@ -342,7 +333,6 @@ void Engine::render()
 	mObjDeco2.draw();
 	mObjDeco3.draw();
 	mObjDeco4.draw();
-	mObjDeco5.draw();
 
 	glutSwapBuffers();
 	mLastTime = mCurrentTime;

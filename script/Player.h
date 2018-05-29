@@ -68,7 +68,7 @@ void ResetCube(Cube* pcube){
     pcube->dx=0;
 }
 
-void StageClearCheck(Cube* pcube){
+void StageClearCheck(Cube* pcube, bool &asd){
     float x=pcube->position.x;
     float y=pcube->position.y;
     float z=pcube->position.z;
@@ -97,6 +97,7 @@ void StageClearCheck(Cube* pcube){
         case 4:
             if (x >43.9 && x<44.1 && y > 55.9 && y<56.1 && z >42.9 && z<43.1){
                 //end
+				asd = true;
             }
 			break;
         default:
@@ -208,7 +209,7 @@ void CubeFall(Cube*pcube) {
 			}
 		}
 		else {
-			float frame = 10.0;
+			float frame = 5.0;
 			pcube->yangle -= 90.0 / frame;
 			pcube->position.y -= 1.0 / frame;
 			pcube->cstatus = Falling;
@@ -222,7 +223,7 @@ void CubeFall(Cube*pcube) {
 void Gravity(Cube* pcube) {
 	int m = pcube->UseMethod;
 	char k = keymode;
-	if((((m==1||m==2)||m==3)&&(k!='a'&&k!='d'))||((m == 4 || m == 5) || m == 6) && (k != 'w'&&k != 's')) {
+	if((((m==1||m==2)||m==3)&&(k!='a'&&k!='d'))||(((m == 4 || m == 5) || m == 6) && (k != 'w'&&k != 's'))) {
 		int tempx = (int)(pcube->full_x_angle) % 90;
 		int tempz = (int)(pcube->full_z_angle) % 90;
 

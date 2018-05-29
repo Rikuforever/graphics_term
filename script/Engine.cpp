@@ -26,9 +26,12 @@ bool Engine::init()
 	mShaderPlayer.loadShaders("shaders/player.vert", "shaders/player.frag");
 	mShaderMap.loadShaders("shaders/map.vert", "shaders/map.frag");
 	mShaderSky.loadShaders("shaders/sky.vert", "shaders/sky.frag");
+	mShaderDeco.loadShaders("shaders/basic.vert", "shaders/basic.frag");
 	mTexturePlayer.loadTexture("textures/player.jpg", true);
 	mTextureFlag.loadTexture("textures/wooden_crate.jpg", true);
 	mTextureSky.loadTexture("textures/sky.jpg", true);
+	mTextureDeco1.loadTexture("textures/barrel_diffuse.png", true);
+	
 
 	// Set Player Object
 	mObjPlayer.bindEngine(this);						// bind 
@@ -101,6 +104,16 @@ bool Engine::init()
 	mObjSky.scale = glm::vec3(50, 50, 50);
 	// Set Sky Material
 	mMaterialSky.bindTexture(mTextureSky);
+
+	// Set Deco
+	mObjDeco1.bindEngine(this);
+	mObjDeco1.bindShader(mShaderDeco);
+	mObjDeco1.bindMaterial(mMaterialDeco1);
+	mObjDeco1.bindLight(mLightDir);
+	mObjDeco1.loadOBJ("models/barrel.obj");
+	mObjDeco1.position = glm::vec3(21, 31, 32);
+	// Set Deco Materil
+	mMaterialDeco1.bindTexture(mTextureDeco1);
 
 	// Set Camera
 	theta = glm::pi<float>() / 4;
@@ -250,6 +263,7 @@ void Engine::render()
 	mObjFlag3.draw();
 	mObjFlag4.draw();
 	mObjSky.draw();
+	mObjDeco1.draw();
 
 	glutSwapBuffers();
 	mLastTime = mCurrentTime;

@@ -7,6 +7,7 @@
 #include "Light.h"
 #include "Material.h"
 #include "GameObject.h"
+#include "GameObject_OBJ.h"
 #include "GameMap.h"
 #include "SkyBox.h"
 
@@ -81,6 +82,12 @@ private:
 	ShaderProgram mShaderSky;
 	Material mMaterialSky;
 	Texture2D mTextureSky;
+
+	// deco
+	ShaderProgram mShaderDeco;
+	GameObject_OBJ mObjDeco1;
+	Material mMaterialDeco1;
+	Texture2D mTextureDeco1;
 };
 
 #endif

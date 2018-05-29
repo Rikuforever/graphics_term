@@ -23,6 +23,7 @@
     <ClCompile Include="script\Engine.cpp" />
     <ClCompile Include="script\GameMap.cpp" />
     <ClCompile Include="script\GameObject.cpp" />
+    <ClCompile Include="script\GameObject_OBJ.cpp" />
     <ClCompile Include="script\Light.cpp" />
     <ClCompile Include="script\main.cpp" />
     <ClCompile Include="script\Material.cpp" />
@@ -35,6 +36,7 @@
     <ClInclude Include="script\Engine.h" />
     <ClInclude Include="script\GameMap.h" />
     <ClInclude Include="script\GameObject.h" />
+    <ClInclude Include="script\GameObject_OBJ.h" />
     <ClInclude Include="script\Light.h" />
     <ClInclude Include="script\Material.h" />
     <ClInclude Include="script\Player.h" />

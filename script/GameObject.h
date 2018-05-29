@@ -31,6 +31,7 @@ public :
 	void bindLight(Light& light);
 protected:
 	GLuint mVAO;
+	GLuint mVBO;
 	ShaderProgram* mShaderPtr;
 	Light* mLightPtr;
 	Material* mMaterialPtr;
